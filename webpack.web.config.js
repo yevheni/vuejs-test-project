@@ -18,7 +18,7 @@ module.exports = {
 	target: "web",
 	devtool: mode === "development" ? "eval-source-map" : "source-map",
 	entry: {
-		"index": path.join(sourceDir, `index.tsx`),
+		"index": path.join(sourceDir, `index.ts`),
 	},
 	output: {
 		path: distDir,
