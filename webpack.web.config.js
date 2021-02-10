@@ -56,6 +56,9 @@ module.exports = {
 	},
 	resolve: {
 		extensions: ['.ts', '.tsx', '.js', '.jsx', '.json'],
+		alias: {
+			vue: 'vue/dist/vue.js'
+		},
 	},
 	module: {
 		rules: [
@@ -113,6 +116,12 @@ module.exports = {
 					},
 				],
 			},
+			{
+				test: /\.html$/,
+				use: {
+					loader: 'html-loader'
+				}
+			}
 		]
 	},
 	plugins: [
