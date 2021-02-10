@@ -1,5 +1,6 @@
 import Vue from "vue";
 import template from "./app.html";
+import {AddWorker} from "./add-worker/add-worker";
 
 export const App = Vue.extend({
 	template,
@@ -9,4 +10,8 @@ export const App = Vue.extend({
 			text: "App",
 		}
 	},
+
+	components: {
+		AddWorker,
+	}
 });

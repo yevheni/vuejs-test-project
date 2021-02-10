@@ -1,0 +1,21 @@
+<div class="add-worker">
+	<div class="bg-white shadow rounded p-4">
+		<h5 class="mb-3">
+			Add worker
+		</h5>
+
+		<form v-on:submit.prevent="onAdd">
+			<div class="input-group">
+				<input
+					type="text"
+					class="form-control"
+					placeholder="Worker's name"
+					v-model="input"
+				>
+				<button type="submit" class="btn btn-primary">
+					Add
+				</button>
+			</div>
+		</form>
+	</div>
+</div>
