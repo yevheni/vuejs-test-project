@@ -1,0 +1,14 @@
+{
+	"compilerOptions": {
+		"module": "CommonJS",
+		"target": "ES6",
+		"esModuleInterop": true,
+		"sourceMap": true,
+		"noImplicitAny": true,
+		"baseUrl": "./",
+		"outDir": "./dist",
+		"jsx": "react",
+		"allowJs": true,
+		"removeComments": true
+	}
+}
