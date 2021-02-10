@@ -21,6 +21,9 @@ router.post("/test", (req, res) => {
 	res.send("OK");
 });
 
+/** Api */
+router.use("/api", )
+
 /** Error handle */
 router.use((err: Error, req: express.Request, res: express.Response, next: express.NextFunction) => {
 	console.error(err);
@@ -28,6 +31,11 @@ router.use((err: Error, req: express.Request, res: express.Response, next: expre
 	res.status(500).json({
 		message: err.message
 	});
+});
+
+/** 404 */
+router.use((req, res, next) => {
+	res.sendStatus(404);
 });
 
 export {router};
