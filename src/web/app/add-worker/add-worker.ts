@@ -1,8 +1,8 @@
-import Vue from "vue";
 import template from "./add-worker.html";
+import {Base} from "../../helpers/base";
 
-export const AddWorker = Vue.extend({
-	template,
+export const AddWorker = Base.extend({
+	template: template,
 
 	data() {
 		return {
@@ -12,9 +12,15 @@ export const AddWorker = Vue.extend({
 
 	methods: {
 		async onAdd(e: Event) {
-			const name = this.$data.input;
+			try {
+				const name = this.input;
 
-			console.log("name:", name);
+				console.log("name:", name);
+
+				throw new Error(name);
+			} catch (err) {
+				this.errorHandle(err);
+			}
 		}
 	}
 });

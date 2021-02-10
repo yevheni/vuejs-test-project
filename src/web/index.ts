@@ -5,6 +5,6 @@ import {App} from "./app/app";
 const app = new Vue({
 	el: '#root',
 	components: {
-		App,
+		App: App,
 	}
 });

@@ -1,9 +1,9 @@
-import Vue from "vue";
 import template from "./app.html";
 import {AddWorker} from "./add-worker/add-worker";
+import {Base} from "../helpers/base";
 
-export const App = Vue.extend({
-	template,
+export const App = Base.extend({
+	template: template,
 
 	data() {
 		return {
@@ -12,6 +12,6 @@ export const App = Vue.extend({
 	},
 
 	components: {
-		AddWorker,
+		AddWorker: AddWorker,
 	}
 });
