@@ -1,25 +1,30 @@
 .calendar {
-	.months {
-		.month {
-			.days, .weekdays {
-				display: grid;
+	.td-auto {
+		white-space: nowrap;
+		width: 1%;
+	}
 
-				$columns: ();
-				@for $i from 0 through 6 {
-					$columns: append($columns, [d-#{$i}] 1fr, space);
-				}
+	.weekdays {
 
-				grid-template-columns: $columns;
-				grid-template-rows: 1fr;
+		//$columns: ();
+		//@for $i from 0 through 6 {
+		//	$columns: append($columns, [d-#{$i}] 1fr, space);
+		//}
+		//
+		//grid-template-columns: $columns;
 
-				.day {
-					@for $i from 0 through 6 {
-						&.d-#{$i} {
-							grid-column: d-#{$i};
-						}
-					}
-				}
-			}
-		}
+		//.day {
+		//	@for $i from 0 through 6 {
+		//		&.d-#{$i} {
+		//			grid-column: d-#{$i};
+		//		}
+		//	}
+		//}
+
+		//.weekday {
+		//	display: grid;
+		//	grid-template-columns: auto auto 1fr;
+		//	grid-template-rows: 1fr;
+		//}
 	}
 }

@@ -8,32 +8,16 @@ export const Calendar = Base.extend({
 
 	data() {
 		return {
-			date: moment(),
+			moment: moment,
+			date: moment().day(1),
+			get weekEndDate() {
+				return moment(this.date).day(7);
+			},
 			weekdays: Array(7).fill(null).map((el, i) => {
 				return {
-					text: moment().weekday(i + 1).format("dddd"),
+					text: moment().weekday(i + 1).format("dd"),
 				}
 			}),
-			// get months() {
-			// 	return Array(12).fill(null).map((el, i) => {
-			// 		const month = moment(this.year).month(i);
-			//
-			// 		return {
-			// 			index: i,
-			// 			name: month.format("MMMM"),
-			// 			days: Array(month.daysInMonth()).fill(null).map((el, i) => {
-			// 				const day = moment(month).date(i + 1);
-			//
-			// 				return {
-			// 					text: day.format("DD"),
-			// 					day_of_week: day.weekday(),
-			// 					day: day,
-			// 				}
-			// 			}),
-			// 			month: month,
-			// 		};
-			// 	})
-			// },
 		}
 	},
 
@@ -41,6 +25,11 @@ export const Calendar = Base.extend({
 		updateMonth(inc: number) {
 			this.date.add(inc, "month");
 			this.$forceUpdate();
-		}
+		},
+
+		updateWeek(inc: number) {
+			this.date.add(inc * 7, "days");
+			this.$forceUpdate();
+		},
 	},
 });

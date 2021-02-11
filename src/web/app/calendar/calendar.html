@@ -18,6 +18,7 @@
 			<div class="col">
 				<h3 class="text-center mb-0">
 					{{ date.format("MMMM") }}
+					{{ date.format("MMMM") !== weekEndDate.format("MMMM") ? weekEndDate.format(" / MMMM") : "" }}
 				</h3>
 			</div>
 
@@ -32,30 +33,50 @@
 			</div>
 		</div>
 
-<!--		<div class="days">-->
-<!--			<div class="day" v-for="day of date.daysInMonth()">-->
-<!--				{{ day }}-->
-<!--			</div>-->
-<!--		</div>-->
+		<div class="row gx-3 mb-3 align-items-center">
+			<div class="col-auto">
+				<button
+					type="button"
+					class="btn btn-primary-light btn-sm text-primary"
+					v-on:click="updateWeek(-1)"
+				>
+					<
+				</button>
+			</div>
 
-		<!--		<div class="months">-->
-		<!--			<div class="month mb-4" v-for="month of months">-->
-		<!--				<h3>-->
-		<!--					{{ month.name }}-->
-		<!--				</h3>-->
+			<div class="col">
+				<h3 class="text-center mb-0">
+					{{ date.format("DD") }} - {{ weekEndDate.format("DD") }}
+				</h3>
+			</div>
 
-		<!--				<div class="weekdays">-->
-		<!--					<div class="day" v-for="day of weekdays">-->
-		<!--						{{ day.text }}-->
-		<!--					</div>-->
-		<!--				</div>-->
+			<div class="col-auto">
+				<button
+					type="button"
+					class="btn btn-primary-light btn-sm text-primary"
+					v-on:click="updateWeek(1)"
+				>
+					>
+				</button>
+			</div>
+		</div>
 
-		<!--				<div class="days">-->
-		<!--					<div class="day" v-for="day of month.days" v-bind:class="`d-${day.day_of_week}`">-->
-		<!--						{{ day.text }}-->
-		<!--					</div>-->
-		<!--				</div>-->
-		<!--			</div>-->
-		<!--		</div>-->
+		<table class="weekdays">
+			<tbody>
+				<tr class="weekday w-100" v-for="(day, i) of weekdays">
+					<td class="day td-auto">
+						{{ day.text }}
+					</td>
+
+					<td class="date td-auto">
+						{{ moment(date).day(i + 1).format("DD") }}
+					</td>
+
+					<td class="">
+						
+					</td>
+				</tr>
+			</tbody>
+		</table>
 	</div>
 </div>
