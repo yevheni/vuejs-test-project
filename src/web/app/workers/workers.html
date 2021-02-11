@@ -1,10 +1,16 @@
 <div class="workers">
 	<div class="bg-white rounded shadow p-4">
-		<h5 class="mb-3">
-			Workers
+		<h5 class="mb-0">
+			<span>
+				{{ "Workers " }}
+			</span>
+
+			<span class="badge bg-primary rounded-pill">
+				{{ workers.length }}
+			</span>
 		</h5>
 
-		<div class="row g-2">
+		<div class="row g-2 mt-3" v-if="workers.length">
 			<div class="col-auto" v-for="worker of workers">
 				<div class="bg-primary text-white shadow-sm rounded py-2 px-3">
 					<b>
