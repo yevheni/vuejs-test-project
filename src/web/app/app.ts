@@ -2,13 +2,14 @@ import template from "./app.html";
 import {Base} from "../helpers/base";
 import {Workers} from "./workers/workers";
 import {IWorker} from "../interfaces/worker";
+import {Calendar} from "./calendar/calendar";
 
 export const App = Base.extend({
 	template: template,
 
 	data() {
 		return {
-			view: "workers", // workers, calendar
+			view: "calendar", // workers, calendar
 			nav_buttons: [
 				{
 					id: "calendar",
@@ -41,5 +42,6 @@ export const App = Base.extend({
 
 	components: {
 		Workers: Workers,
+		Calendar: Calendar,
 	}
 });
