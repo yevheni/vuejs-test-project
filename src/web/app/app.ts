@@ -1,5 +1,4 @@
 import template from "./app.html";
-import {AddWorker} from "./add-worker/add-worker";
 import {Base} from "../helpers/base";
 import {Workers} from "./workers/workers";
 import {IWorker} from "../interfaces/worker";
@@ -41,7 +40,6 @@ export const App = Base.extend({
 	},
 
 	components: {
-		AddWorker: AddWorker,
 		Workers: Workers,
 	}
 });

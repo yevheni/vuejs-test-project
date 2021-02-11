@@ -25,5 +25,14 @@ export const store = new Vuex.Store({
 				state.workers.splice(index, 1);
 			}
 		},
+
+		update_worker(state, payload) {
+			const [id, worker] = payload;
+			const index = state.workers.findIndex(worker => worker._id === id);
+
+			if (index !== -1) {
+				state.workers.splice(index, 1, worker);
+			}
+		},
 	},
 });
