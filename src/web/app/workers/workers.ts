@@ -17,7 +17,21 @@ export const Workers = Base.extend({
 	methods: {
 		onAdd(worker: IWorker) {
 			this.add = false;
-		}
+		},
+
+		async deleteWorker(id: string) {
+			try {
+				/** Delete worker */
+				const deleteRes = await this.api.post("/workers/delete", {
+					id: id
+				});
+
+				/** Delete worker from store */
+				this.$store.commit("delete_worker", id);
+			} catch(err) {
+				this.errorHandle(err);
+			}
+		},
 	},
 
 	components: {

@@ -10,12 +10,20 @@ export const store = new Vuex.Store({
 	},
 
 	mutations: {
-		new_worker(state, payload) {
-			state.workers.push(payload);
+		new_worker(state, worker) {
+			state.workers.push(worker);
 		},
 
-		workers(state, payload) {
-			state.workers.splice(0, state.workers.length, ...payload);
-		}
+		workers(state, workers = []) {
+			state.workers.splice(0, state.workers.length, ...workers);
+		},
+
+		delete_worker(state, id) {
+			const index = state.workers.findIndex(worker => worker._id === id);
+
+			if (index !== -1) {
+				state.workers.splice(index, 1);
+			}
+		},
 	},
 });
