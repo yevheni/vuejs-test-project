@@ -39,4 +39,20 @@ api.get("/workers", (req, res, next) => {
 	})().catch(next);
 });
 
+api.post("/workers/delete", (req, res, next) => {
+	(async () => {
+		const id = req.body.id;
+
+		/** Delete worker */
+		await db.models.workers.deleteOne({
+			_id: id
+		});
+
+		/** Send response */
+		res.json({
+			status: "success",
+		});
+	})().catch(next);
+});
+
 export {api};
