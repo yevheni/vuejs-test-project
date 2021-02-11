@@ -55,4 +55,26 @@ api.post("/workers/delete", (req, res, next) => {
 	})().catch(next);
 });
 
+api.post("/workers/update", (req, res, next) => {
+	(async () => {
+		const id = req.body.id;
+
+		/** Find worker */
+		const workerDoc = await db.models.workers.findOne({
+			_id: id
+		});
+
+		if (!workerDoc) throw new Error(`Worker not found`);
+
+		/** Update worker */
+		workerDoc.set("name", req.body.name);
+		await workerDoc.save();
+
+		/** Send response */
+		res.json({
+			worker: workerDoc.toJSON(),
+		});
+	})().catch(next);
+});
+
 export {api};
