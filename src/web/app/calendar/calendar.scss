@@ -1,0 +1,25 @@
+.calendar {
+	.months {
+		.month {
+			.days, .weekdays {
+				display: grid;
+
+				$columns: ();
+				@for $i from 0 through 6 {
+					$columns: append($columns, [d-#{$i}] 1fr, space);
+				}
+
+				grid-template-columns: $columns;
+				grid-template-rows: 1fr;
+
+				.day {
+					@for $i from 0 through 6 {
+						&.d-#{$i} {
+							grid-column: d-#{$i};
+						}
+					}
+				}
+			}
+		}
+	}
+}

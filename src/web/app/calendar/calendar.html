@@ -10,9 +10,15 @@
 					{{ month.name }}
 				</h3>
 
+				<div class="weekdays">
+					<div class="day" v-for="day of weekdays">
+						{{ day.text }}
+					</div>
+				</div>
+
 				<div class="days">
-					<div class="day" v-for="day of month.days">
-						{{ day.text }} {{ day.day_of_week }}
+					<div class="day" v-for="day of month.days" v-bind:class="`d-${day.day_of_week}`">
+						{{ day.text }}
 					</div>
 				</div>
 			</div>

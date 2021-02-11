@@ -1,3 +1,4 @@
+import "./calendar.scss";
 import template from "./calendar.html";
 import {Base} from "../../helpers/base";
 import moment from "moment";
@@ -8,6 +9,11 @@ export const Calendar = Base.extend({
 	data() {
 		return {
 			year: moment().year(),
+			weekdays: Array(7).fill(null).map((el, i) => {
+				return {
+					text: moment().weekday(i + 1).format("dddd"),
+				}
+			}),
 			get months() {
 				return Array(12).fill(null).map((el, i) => {
 					const month = moment(this.year).month(i);
