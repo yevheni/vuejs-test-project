@@ -21,6 +21,22 @@ api.post("/workers/create", (req, res, next) => {
 			worker: workerDoc.toJSON(),
 		});
 	})().catch(next);
-})
+});
+
+api.get("/workers", (req, res, next) => {
+	(async () => {
+		/** Get workers */
+		const workers = await db.models.workers.aggregate([
+			{
+				$match: {}
+			}
+		]).allowDiskUse(true).exec();
+
+		/** Send response */
+		res.json({
+			workers: workers,
+		});
+	})().catch(next);
+});
 
 export {api};
