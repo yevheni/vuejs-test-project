@@ -12,6 +12,9 @@
 					placeholder="Worker's name"
 					v-model="input"
 				>
+				<button type="button" class="btn btn-secondary" v-on:click="$emit('cancel')">
+					Cancel
+				</button>
 				<button type="submit" class="btn btn-primary">
 					{{ id ? "Save" : "Add" }}
 				</button>

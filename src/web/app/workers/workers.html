@@ -25,14 +25,19 @@
 		</div>
 
 		<div class="mt-3" v-if="add">
-			<AddEditWorker v-on:done="onAdd"></AddEditWorker>
+			<AddEditWorker
+				v-on:done="onAdd"
+				v-on:cancel="add = false"
+			></AddEditWorker>
 		</div>
 
 		<div class="mt-3" v-if="edit">
 			<AddEditWorker
+				v-bind:key="edit._id"
 				v-bind:id="edit._id"
 				v-bind:name="edit.name"
 				v-on:done="onEdit"
+				v-on:cancel="edit = null"
 			></AddEditWorker>
 		</div>
 
