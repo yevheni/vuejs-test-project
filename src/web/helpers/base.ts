@@ -1,4 +1,5 @@
 import Vue from "vue";
+import axios from "axios";
 
 interface IError extends Error {
 	response?: {
@@ -7,6 +8,13 @@ interface IError extends Error {
 }
 
 export const Base = Vue.extend({
+	computed: {
+		api: () => {
+			return axios.create({
+				baseURL: "http://localhost:9090/api",
+			});
+		}
+	},
 	methods: {
 		errorHandle(err: IError) {
 			console.error(err);
@@ -14,5 +22,5 @@ export const Base = Vue.extend({
 			const message = err.response?.data?.message || err.message;
 			alert(message);
 		}
-	}
+	},
 });

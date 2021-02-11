@@ -1,6 +1,5 @@
 import template from "./add-worker.html";
 import {Base} from "../../helpers/base";
-import {api} from "../../helpers/api";
 
 export const AddWorker = Base.extend({
 	template: template,
@@ -18,7 +17,7 @@ export const AddWorker = Base.extend({
 
 				console.log("name:", name);
 
-				const workerRes = await api().post("/workers/create", {
+				const workerRes = await this.api.post("/workers/create", {
 					name: name
 				});
 				const worker = workerRes.data.worker;
