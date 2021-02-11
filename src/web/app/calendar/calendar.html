@@ -1,5 +1,21 @@
 <div class="calendar">
 	<div class="bg-white rounded shadow p-4">
-		{{ year }}
+		<h1 class="mb-4">
+			{{ year }}
+		</h1>
+
+		<div class="months">
+			<div class="month" v-for="month of months">
+				<h3>
+					{{ month.name }}
+				</h3>
+
+				<div class="days">
+					<div class="day" v-for="day of month.days">
+						{{ day.text }} {{ day.day_of_week }}
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 </div>
