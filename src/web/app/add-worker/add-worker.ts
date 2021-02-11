@@ -4,9 +4,13 @@ import {Base} from "../../helpers/base";
 export const AddWorker = Base.extend({
 	template: template,
 
+	props: [
+		"name",
+	],
+
 	data() {
 		return {
-			input: "",
+			input: this.name || "",
 		}
 	},
 
@@ -28,6 +32,9 @@ export const AddWorker = Base.extend({
 
 				/** Put worker to store */
 				this.$store.commit("new_worker", worker);
+
+				/** Emit callback to external world */
+				this.$emit("add", worker);
 			} catch (err) {
 				this.errorHandle(err);
 			}
