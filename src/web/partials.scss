@@ -7,6 +7,7 @@ $success: #1ecd88;
 
 /** Colors */
 $black: #000000;
+$primary-light: transparentize($primary, 0.8);
 $transparent: transparentize(white, 1);
 
 $custom-colors: (
@@ -18,6 +19,7 @@ $custom-colors: (
 
 	// Custom
 	"black": $black,
+	"primary-light": $primary-light,
 );
 
 $border-radius: 0.4rem;

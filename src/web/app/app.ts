@@ -9,7 +9,17 @@ export const App = Base.extend({
 
 	data() {
 		return {
-			text: "App",
+			view: "workers", // workers, calendar
+			nav_buttons: [
+				{
+					id: "calendar",
+					text: "Calendar",
+				},
+				{
+					id: "workers",
+					text: "Workers",
+				},
+			]
 		}
 	},
 

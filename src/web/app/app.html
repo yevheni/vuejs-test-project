@@ -1,21 +1,46 @@
 <div class="app">
 	<div class="head bg-white shadow-lg">
 		<div class="container py-4">
-			<h3 class="mb-0 px-4">
-				<a href="/">
-					Vuejs
-				</a>
-			</h3>
+			<div class="px-4">
+				<div class="row gx-2">
+					<div class="col-auto">
+						<h3 class="mb-0">
+							<a href="/">
+								Vuejs
+							</a>
+						</h3>
+					</div>
+
+					<div class="col"></div>
+
+					<div class="col-auto" v-for="btn of nav_buttons">
+						<button
+							type="button"
+							class="btn btn-sm"
+							v-bind:class="btn.id === view ? 'btn-primary' : 'btn-outline-primary'"
+							v-on:click="view = btn.id"
+						>
+							{{ btn.text }}
+						</button>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 
 	<div class="container pt-4">
-		<div class="mb-4">
-			<AddWorker></AddWorker>
+		<div v-if="view === 'workers'">
+<!--			<div class="mb-4">-->
+<!--				<AddWorker></AddWorker>-->
+<!--			</div>-->
+
+<!--			<div class="mb-4">-->
+				<Workers></Workers>
+<!--			</div>-->
 		</div>
 
-		<div class="mb-4">
-			<Workers></Workers>
+		<div v-if="view === 'calendar'">
+			Calendar
 		</div>
 	</div>
 </div>
