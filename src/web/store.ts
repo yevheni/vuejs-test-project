@@ -15,7 +15,7 @@ export const store = new Vuex.Store({
 		},
 
 		workers(state, payload) {
-			state.workers = payload;
+			state.workers.splice(0, state.workers.length, ...payload);
 		}
 	},
 });
