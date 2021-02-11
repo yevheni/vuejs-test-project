@@ -1,6 +1,6 @@
 import template from "./workers.html";
 import {Base} from "../../helpers/base";
-import {AddWorker} from "../add-worker/add-worker";
+import {AddEditWorker} from "../add-edit-worker/add-edit-worker";
 import {IWorker} from "../../interfaces/worker";
 
 export const Workers = Base.extend({
@@ -10,13 +10,17 @@ export const Workers = Base.extend({
 		return {
 			workers: this.$store.state.workers,
 			add: false,
-			edit: false,
+			edit: null,
 		}
 	},
 
 	methods: {
 		onAdd(worker: IWorker) {
 			this.add = false;
+		},
+
+		onEdit(worker: IWorker) {
+			this.edit = null;
 		},
 
 		async deleteWorker(id: string) {
@@ -35,6 +39,6 @@ export const Workers = Base.extend({
 	},
 
 	components: {
-		AddWorker: AddWorker
+		AddEditWorker: AddEditWorker
 	}
 });

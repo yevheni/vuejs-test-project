@@ -1,10 +1,10 @@
-<div class="add-worker">
+<div class="add-edit-worker">
 	<div class="bg-white shadow rounded p-4">
 		<h5 class="mb-3">
-			Add worker
+			{{ id ? "Edit worker" : "Add worker" }}
 		</h5>
 
-		<form v-on:submit.prevent="onAdd">
+		<form v-on:submit.prevent="onSubmit">
 			<div class="input-group">
 				<input
 					type="text"
@@ -13,7 +13,7 @@
 					v-model="input"
 				>
 				<button type="submit" class="btn btn-primary">
-					Add
+					{{ id ? "Save" : "Add" }}
 				</button>
 			</div>
 		</form>
