@@ -115,4 +115,25 @@ api.post("/hours/get", (req, res, next) => {
 	})().catch(next);
 });
 
+api.post("/hours/update", (req, res, next) => {
+	(async () => {
+		/** Get hours document */
+		const hoursDoc = await db.models.hours.findOne({
+			_id: req.body.id,
+		});
+
+		if (!hoursDoc) throw new Error(`Hours document not found`);
+
+		/** Update */
+		hoursDoc.set("start", req.body.start);
+		hoursDoc.set("end", req.body.end);
+		await hoursDoc.save();
+
+		/** Send response */
+		res.json({
+			hours: hoursDoc.toJSON()
+		});
+	})().catch(next);
+});
+
 export {api};
