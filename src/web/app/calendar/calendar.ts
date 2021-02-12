@@ -3,6 +3,7 @@ import template from "./calendar.html";
 import {Base} from "../../helpers/base";
 import moment, {unitOfTime} from "moment";
 import {IHour} from "../../interfaces/hour";
+import {IWorker} from "../../interfaces/worker";
 
 export const Calendar = Base.extend({
 	template: template,
@@ -35,7 +36,7 @@ export const Calendar = Base.extend({
 				start: this.weekStartDate.valueOf(),
 				end: this.weekEndDate.valueOf(),
 			});
-			const hours = hoursRes.data.hours as IHour[];
+			const hours = hoursRes.data.hours;
 
 			console.log("hours:", hours);
 
@@ -80,6 +81,14 @@ export const Calendar = Base.extend({
 
 		getDayHours(day: number, hour: number) {
 			return this.hours.filter((h: IHour) => moment(h.date).day() === day && h.start <= hour && h.end >= hour);
+		},
+
+		getDayWorkers(day: number) {
+			return this.workers.map((worker: IWorker & { hours: IHour[] }) => {
+				worker.hours = this.hours.filter((h: IHour) => h.worker === worker._id && moment(h.date).day() === day);
+
+				return worker;
+			}).filter((worker: IWorker & { hours: IHour[] }) => worker.hours.length);
 		}
 	},
 

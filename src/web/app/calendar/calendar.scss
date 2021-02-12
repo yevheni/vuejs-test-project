@@ -33,10 +33,12 @@
 			grid-template-rows: 1fr;
 
 			.worker-hours {
+				$size: 5px;
 				//display: flex;
+				border-radius: $size / 2;
+				overflow: hidden;
 
 				.worker-hour {
-					$size: 5px;
 					//width: $size;
 					height: $size;
 					//border-radius: $size;

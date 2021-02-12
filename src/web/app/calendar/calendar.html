@@ -174,7 +174,7 @@
 					</div>
 				</div>
 
-				<div class="hours border border-primary-light rounded p-2">
+				<div class="hours border border-primary-light rounded p-2 mb-2">
 					<div class="hour p-1" v-for="hour of 24">
 						<div class="mb-1">
 							{{ hour - 1 }}
@@ -183,6 +183,18 @@
 						<div class="worker-hours">
 							<div class="worker-hour" v-for="workerHour of getDayHours(i + 1, hour - 1)"></div>
 						</div>
+					</div>
+				</div>
+
+				<div class="workers">
+					<div class="worker" v-for="worker of getDayWorkers(i + 1)">
+						<span class="me-3">
+							{{ worker.name }}
+						</span>
+
+						<span class="me-2" v-for="workerHour of worker.hours">
+							({{ workerHour.start }} - {{ workerHour.end }})
+						</span>
 					</div>
 				</div>
 			</div>
