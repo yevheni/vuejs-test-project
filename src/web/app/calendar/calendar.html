@@ -1,7 +1,7 @@
 <div class="calendar">
 	<div class="bg-white rounded shadow p-4">
 		<h1 class="text-center mb-3">
-			{{ date.format("YYYY") }}
+			{{ weekStartDate.format("YYYY") }}
 		</h1>
 
 		<div class="row gx-3 mb-3 align-items-center">
@@ -17,8 +17,10 @@
 
 			<div class="col">
 				<h3 class="text-center mb-0">
-					{{ date.format("MMMM") }}
-					{{ date.format("MMMM") !== weekEndDate.format("MMMM") ? weekEndDate.format(" / MMMM") : "" }}
+					{{ weekStartDate.format("MMMM") }}
+					{{
+						weekStartDate.format("MMMM") !== weekEndDate.format("MMMM") ? weekEndDate.format(" / MMMM") : ""
+					}}
 				</h3>
 			</div>
 
@@ -46,7 +48,7 @@
 
 			<div class="col">
 				<h3 class="text-center mb-0">
-					{{ date.format("DD") }} - {{ weekEndDate.format("DD") }}
+					{{ weekStartDate.format("DD") }} - {{ weekEndDate.format("DD") }}
 				</h3>
 			</div>
 
@@ -69,11 +71,11 @@
 					</td>
 
 					<td class="date td-auto">
-						{{ moment(date).day(i + 1).format("DD") }}
+						{{ moment(weekStartDate).day(i + 1).format("DD") }}
 					</td>
 
 					<td class="">
-						
+
 					</td>
 				</tr>
 			</tbody>

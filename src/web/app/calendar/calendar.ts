@@ -9,9 +9,9 @@ export const Calendar = Base.extend({
 	data() {
 		return {
 			moment: moment,
-			date: moment().day(1),
+			weekStartDate: moment().day(1),
 			get weekEndDate() {
-				return moment(this.date).day(7);
+				return moment(this.weekStartDate).day(7);
 			},
 			weekdays: Array(7).fill(null).map((el, i) => {
 				return {
@@ -23,12 +23,12 @@ export const Calendar = Base.extend({
 
 	methods: {
 		updateMonth(inc: number) {
-			this.date.add(inc, "month");
+			this.weekStartDate.add(inc, "month");
 			this.$forceUpdate();
 		},
 
 		updateWeek(inc: number) {
-			this.date.add(inc * 7, "days");
+			this.weekStartDate.add(inc * 7, "days");
 			this.$forceUpdate();
 		},
 	},
