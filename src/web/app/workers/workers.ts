@@ -26,6 +26,8 @@ export const Workers = Base.extend({
 
 		async deleteWorker(id: string) {
 			try {
+				this.edit = null;
+
 				/** Delete worker */
 				const deleteRes = await this.api.post("/workers/delete", {
 					id: id

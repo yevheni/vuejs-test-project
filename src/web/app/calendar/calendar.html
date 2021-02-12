@@ -2,15 +2,17 @@
 	<div class="bg-white rounded shadow p-4 mb-4">
 		<div class="row g-2 g-md-4 g-lg-5 align-items-center mb-5">
 			<div class="col-12 col-md-4 order-md-2">
-				<div class="border border-primary-light rounded p-2 p-md-3">
+				<div class="border bg-primary-light border-primary-light rounded p-2 p-md-3">
 					<div class="year row gx-3 align-items-center">
 						<div class="col-auto">
 							<button
 								type="button"
-								class="btn btn-primary-light btn-sm text-primary"
+								class="btn btn-secondary btn-sm"
 								v-on:click="updateDate(-1, 'year')"
 							>
-								<
+								<h6 class="mb-0">
+									<
+								</h6>
 							</button>
 						</div>
 
@@ -26,10 +28,12 @@
 						<div class="col-auto">
 							<button
 								type="button"
-								class="btn btn-primary-light btn-sm text-primary"
+								class="btn btn-secondary btn-sm"
 								v-on:click="updateDate(1, 'year')"
 							>
-								>
+								<h6 class="mb-0">
+									>
+								</h6>
 							</button>
 						</div>
 					</div>
@@ -37,15 +41,17 @@
 			</div>
 
 			<div class="col-12 col-md-4 order-md-1">
-				<div class="border border-primary-light rounded p-2 p-md-3">
+				<div class="border bg-primary-light border-primary-light rounded p-2 p-md-3">
 					<div class="month row gx-3 align-items-center">
 						<div class="col-auto">
 							<button
 								type="button"
-								class="btn btn-primary-light btn-sm text-primary"
+								class="btn btn-secondary btn-sm"
 								v-on:click="updateDate(-1, 'month')"
 							>
-								<
+								<h6 class="mb-0">
+									<
+								</h6>
 							</button>
 						</div>
 
@@ -61,10 +67,12 @@
 						<div class="col-auto">
 							<button
 								type="button"
-								class="btn btn-primary-light btn-sm text-primary"
+								class="btn btn-secondary btn-sm"
 								v-on:click="updateDate(1, 'month')"
 							>
-								>
+								<h6 class="mb-0">
+									>
+								</h6>
 							</button>
 						</div>
 					</div>
@@ -72,15 +80,17 @@
 			</div>
 
 			<div class="col-12 col-md-4 order-md-0">
-				<div class="border border-primary-light rounded p-2 p-md-3">
+				<div class="border bg-primary-light border-primary-light rounded p-2 p-md-3">
 					<div class="week row gx-3 align-items-center">
 						<div class="col-auto">
 							<button
 								type="button"
-								class="btn btn-primary-light btn-sm text-primary"
+								class="btn btn-secondary btn-sm"
 								v-on:click="updateDate(-7, 'days')"
 							>
-								<
+								<h6 class="mb-0">
+									<
+								</h6>
 							</button>
 						</div>
 
@@ -93,10 +103,12 @@
 						<div class="col-auto">
 							<button
 								type="button"
-								class="btn btn-primary-light btn-sm text-primary"
+								class="btn btn-secondary btn-sm"
 								v-on:click="updateDate(7, 'days')"
 							>
-								>
+								<h6 class="mb-0">
+									>
+								</h6>
 							</button>
 						</div>
 					</div>
@@ -121,9 +133,9 @@
 
 					<div class="col-auto">
 						<button type="button" class="btn btn-primary btn-sm" v-on:click="edit = null; add = i">
-							<b>
+							<h6 class="mb-0">
 								+
-							</b>
+							</h6>
 						</button>
 					</div>
 				</div>
@@ -151,7 +163,8 @@
 					</div>
 				</div>
 
-				<div class="hours border border-primary rounded p-2 mb-3">
+				<!--				<div class="hours border border-primary rounded p-2 mb-3">-->
+				<div class="hours rounded p-2 mb-3">
 					<div class="hour p-1" v-for="hour of 24">
 						<div class="mb-1">
 							{{ hour - 1 }}
@@ -176,10 +189,10 @@
 								<div class="row g-2">
 									<div class="col-auto" v-for="workerHour of worker.hours">
 										<button
-											class="btn btn-sm btn-outline-primary"
+											class="worker-hours-btn btn btn-sm"
 											v-on:click="add = null; edit = { index: i, hours: workerHour }"
 										>
-											({{ workerHour.start }} - {{ workerHour.end }})
+											{{ workerHour.start }} - {{ workerHour.end }}
 										</button>
 									</div>
 								</div>

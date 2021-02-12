@@ -47,7 +47,7 @@
 
 		<div class="row g-2 g-md-3 mb-3" v-if="workers.length">
 			<div class="col-12 col-md-6 col-lg-4 col-xxl-3" v-for="worker of workers">
-				<div class="bg-white border border-1 border-primary-light rounded py-2 ps-3 pe-2">
+				<div class="bg-primary-light border border-1 border-primary-light rounded py-2 ps-3 pe-2">
 					<div class="row gx-2 align-items-center">
 						<div class="col-auto">
 							<b>
@@ -58,16 +58,20 @@
 						<div class="col"></div>
 
 						<div class="col-auto">
-							<button type="button" class="btn btn-outline-primary btn-sm"
+							<button type="button" class="edit-btn btn btn-sm"
 							        v-on:click="add = false; edit = worker">
-								Edit
+								<b>
+									Edit
+								</b>
 							</button>
 						</div>
 
 						<div class="col-auto">
-							<button type="button" class="btn btn-outline-danger btn-sm"
+							<button type="button" class="btn btn-danger btn-sm text-white"
 							        v-on:click="deleteWorker(worker._id)">
-								Delete
+								<b>
+									Delete
+								</b>
 							</button>
 						</div>
 					</div>

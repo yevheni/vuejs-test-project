@@ -1,13 +1,13 @@
 /** Bootstrap colors overrides */
-$primary: #006ed0;
+$primary: #1576cd;
 $dark: #212424;
 $secondary: #e6ecf1;
-$danger: #d75a5a;
+$danger: #d04c4c;
 $success: #1ecd88;
 
 /** Colors */
 $black: #000000;
-$primary-light: transparentize($primary, 0.8);
+$primary-light: transparentize($primary, 0.95);
 $transparent: transparentize(white, 1);
 
 $custom-colors: (

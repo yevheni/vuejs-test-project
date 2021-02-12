@@ -9,6 +9,8 @@
 			display: grid;
 			grid-template-columns: repeat(6, 1fr);
 			grid-template-rows: 1fr;
+			background-color: transparentize($primary, 0.975);
+			border: 1px solid transparentize($primary, 0.9);
 
 			.worker-hours {
 				$size: 6px;
@@ -17,7 +19,7 @@
 
 				.worker-hour {
 					height: $size;
-					background-color: $primary-light;
+					background-color: transparentize($primary, 0.75);
 				}
 			}
 
@@ -27,6 +29,12 @@
 			@media (min-width: 992px) {
 				grid-template-columns: repeat(24, 1fr);
 			}
+		}
+
+		.worker-hours-btn {
+			background-color: transparentize($primary, 0.9);
+			color: transparentize($primary, 0.2);
+			font-weight: bold;
 		}
 	}
 

@@ -1,23 +1,33 @@
 <div class="add-edit-worker">
-	<div class="bg-white shadow rounded p-4">
-		<h5 class="mb-3">
-			{{ id ? "Edit worker" : "Add worker" }}
-		</h5>
-
+	<div class="bg-white border border-primary shadow rounded p-3">
 		<form v-on:submit.prevent="onSubmit">
-			<div class="input-group">
+			<label class="label">
+				{{ id ? "Edit worker" : "Add worker" }}
+			</label>
+
+			<div class="mb-3">
 				<input
 					type="text"
 					class="form-control"
 					placeholder="Worker's name"
 					v-model="input"
 				>
-				<button type="button" class="btn btn-secondary" v-on:click="$emit('cancel')">
-					Cancel
-				</button>
-				<button type="submit" class="btn btn-primary">
-					{{ id ? "Save" : "Add" }}
-				</button>
+			</div>
+
+			<div class="row g-2 justify-content-end">
+				<div class="col-auto">
+					<button type="button" class="btn btn-secondary" v-on:click="$emit('cancel')">
+						Cancel
+					</button>
+				</div>
+
+				<div class="col-auto">
+					<button type="submit" class="btn btn-primary">
+						<b>
+							{{ id ? "Save" : "Add" }}
+						</b>
+					</button>
+				</div>
 			</div>
 		</form>
 	</div>

@@ -1,4 +1,9 @@
 .workers {
+	.edit-btn {
+		background-color: transparentize($primary, 0.85);
+		color: transparentize($primary, 0.15);
+	}
+
 	@media (min-width: 768px) {
 		.add-edit-worker {
 			position: absolute;
