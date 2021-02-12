@@ -19,12 +19,12 @@ export const Calendar = Base.extend({
 			weekdays: Array(7).fill(null).map((el, i) => {
 				return {
 					text: moment().weekday(i + 1).format("dddd"),
-					add: false,
-					edit: null as IHour,
 				}
 			}),
 			workers: this.$store.state.workers,
 			hours: [] as IHour[],
+			add: null,
+			edit: null as any,
 		}
 	},
 
@@ -53,13 +53,13 @@ export const Calendar = Base.extend({
 			this.init().catch(this.errorHandle);
 		},
 
-		onAddHours(index: number, hours: any) {
-			this.weekdays[index].add = false;
+		onAddHours(hours: any) {
+			this.add = null;
 			this.init().catch(this.errorHandle);
 		},
 
-		onEditDeleteHours(index: number, hours?: any) {
-			this.weekdays[index].edit = null;
+		onEditDeleteHours(hours?: any) {
+			this.edit = null;
 			this.init().catch(this.errorHandle);
 		},
 

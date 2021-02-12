@@ -120,7 +120,7 @@
 					</div>
 
 					<div class="col-auto">
-						<button type="button" class="btn btn-primary btn-sm" v-on:click="day.edit = null; day.add = !day.add">
+						<button type="button" class="btn btn-primary btn-sm" v-on:click="edit = null; add = i">
 							<b>
 								+
 							</b>
@@ -128,24 +128,24 @@
 					</div>
 				</div>
 
-				<div class="row g-0 justify-content-end mb-3 mb-md-0" v-if="day.add">
+				<div class="row g-0 justify-content-end mb-3 mb-md-0" v-if="add === i">
 					<div class="col-12 col-md-6 col-lg-4 col-xxl-3 position-relative">
 						<AddEditWorkerHours
 							v-bind:date="moment(weekStartDate).day(i + 1)"
-							v-on:done="onAddHours(i, $event)"
-							v-on:cancel="day.add = false"
+							v-on:done="onAddHours"
+							v-on:cancel="add = null"
 						></AddEditWorkerHours>
 					</div>
 				</div>
 
-				<div class="row g-0 justify-content-end mb-3 mb-md-0" v-if="day.edit">
+				<div class="row g-0 justify-content-end mb-3 mb-md-0" v-if="edit?.index === i">
 					<div class="col-12 col-md-6 col-lg-4 col-xxl-3 position-relative">
 						<AddEditWorkerHours
-							v-bind:date="moment(day.edit.date)"
-							v-bind:hours="day.edit"
-							v-on:done="onEditDeleteHours(i, $event)"
-							v-on:cancel="day.edit = null"
-							v-on:deleted="onEditDeleteHours(i)"
+							v-bind:date="moment(edit.hours.date)"
+							v-bind:hours="edit.hours"
+							v-on:done="onEditDeleteHours"
+							v-on:cancel="edit = null"
+							v-on:deleted="onEditDeleteHours"
 						></AddEditWorkerHours>
 					</div>
 				</div>
@@ -176,7 +176,7 @@
 									<div class="col-auto" v-for="workerHour of worker.hours">
 										<button
 											class="btn btn-sm btn-outline-primary"
-											v-on:click="day.add = false; day.edit = workerHour"
+											v-on:click="add = null; edit = { index: i, hours: workerHour }"
 										>
 											({{ workerHour.start }} - {{ workerHour.end }})
 										</button>
