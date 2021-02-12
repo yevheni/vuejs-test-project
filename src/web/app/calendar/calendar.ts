@@ -64,7 +64,7 @@ export const Calendar = Base.extend({
 		},
 
 		getDayHours(day: number, hour: number) {
-			return this.hours.filter((h: IHour) => moment(h.date).day() === day && h.start <= hour && h.end >- hour);
+			return this.hours.filter((h: IHour) => moment(h.date).day() === day && h.start <= hour && h.end >= hour);
 		},
 
 		getDayWorkers(day: number) {
