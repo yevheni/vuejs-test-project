@@ -1,0 +1,9 @@
+.workers {
+	@media (min-width: 768px) {
+		.add-edit-worker {
+			position: absolute;
+			z-index: 1;
+			width: 100%;
+		}
+	}
+}

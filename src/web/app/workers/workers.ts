@@ -1,3 +1,4 @@
+import "./workers.scss";
 import template from "./workers.html";
 import {Base} from "../../helpers/base";
 import {AddEditWorker} from "../add-edit-worker/add-edit-worker";

@@ -1,6 +1,6 @@
 <div class="workers">
 	<div class="bg-white rounded shadow p-4">
-		<div class="row gx-2">
+		<div class="row gx-2 mb-3">
 			<div class="col-auto">
 				<h5 class="mb-0">
 					<span>
@@ -16,7 +16,7 @@
 			<div class="col"></div>
 
 			<div class="col-auto">
-				<button type="button" class="btn btn-sm btn-primary" v-on:click="add = !add">
+				<button type="button" class="btn btn-sm btn-primary" v-on:click="edit = null; add = !add">
 					<b>
 						Add
 					</b>
@@ -24,24 +24,28 @@
 			</div>
 		</div>
 
-		<div class="mt-3" v-if="add">
-			<AddEditWorker
-				v-on:done="onAdd"
-				v-on:cancel="add = false"
-			></AddEditWorker>
+		<div class="row g-0 justify-content-end mb-3 mb-md-0" v-if="add">
+			<div class="col-12 col-md-6 col-lg-4 col-xxl-3 position-relative">
+				<AddEditWorker
+					v-on:done="onAdd"
+					v-on:cancel="add = false"
+				></AddEditWorker>
+			</div>
 		</div>
 
-		<div class="mt-3" v-if="edit">
-			<AddEditWorker
-				v-bind:key="edit._id"
-				v-bind:id="edit._id"
-				v-bind:name="edit.name"
-				v-on:done="onEdit"
-				v-on:cancel="edit = null"
-			></AddEditWorker>
+		<div class="row g-0 justify-content-end mb-3 mb-md-0" v-if="edit">
+			<div class="col-12 col-md-6 col-lg-4 col-xxl-3 position-relative">
+				<AddEditWorker
+					v-bind:key="edit._id"
+					v-bind:id="edit._id"
+					v-bind:name="edit.name"
+					v-on:done="onEdit"
+					v-on:cancel="edit = null"
+				></AddEditWorker>
+			</div>
 		</div>
 
-		<div class="row g-2 g-md-3 mt-3" v-if="workers.length">
+		<div class="row g-2 g-md-3 mb-3" v-if="workers.length">
 			<div class="col-12 col-md-6 col-lg-4 col-xxl-3" v-for="worker of workers">
 				<div class="bg-white border border-1 border-primary-light rounded py-2 ps-3 pe-2">
 					<div class="row gx-2 align-items-center">
@@ -54,13 +58,15 @@
 						<div class="col"></div>
 
 						<div class="col-auto">
-							<button type="button" class="btn btn-outline-primary btn-sm" v-on:click="edit = worker">
+							<button type="button" class="btn btn-outline-primary btn-sm"
+							        v-on:click="add = false; edit = worker">
 								Edit
 							</button>
 						</div>
 
 						<div class="col-auto">
-							<button type="button" class="btn btn-outline-danger btn-sm" v-on:click="deleteWorker(worker._id)">
+							<button type="button" class="btn btn-outline-danger btn-sm"
+							        v-on:click="deleteWorker(worker._id)">
 								Delete
 							</button>
 						</div>
