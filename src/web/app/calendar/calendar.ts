@@ -1,7 +1,7 @@
 import "./calendar.scss";
 import template from "./calendar.html";
 import {Base} from "../../helpers/base";
-import moment from "moment";
+import moment, {unitOfTime} from "moment";
 
 export const Calendar = Base.extend({
 	template: template,
@@ -18,18 +18,18 @@ export const Calendar = Base.extend({
 					text: moment().weekday(i + 1).format("dddd"),
 				}
 			}),
+			showAddHours: false,
 		}
 	},
 
 	methods: {
-		updateMonth(inc: number) {
-			this.weekStartDate.add(inc, "month");
+		updateDate(inc: number, unit: unitOfTime.Base) {
+			this.weekStartDate.add(inc, unit);
 			this.$forceUpdate();
 		},
 
-		updateWeek(inc: number) {
-			this.weekStartDate.add(inc * 7, "days");
-			this.$forceUpdate();
-		},
+		addHours() {
+
+		}
 	},
 });
