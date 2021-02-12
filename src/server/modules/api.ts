@@ -29,6 +29,11 @@ api.get("/workers", (req, res, next) => {
 		const workers = await db.models.workers.aggregate([
 			{
 				$match: {}
+			},
+			{
+				$sort: {
+					created: 1
+				}
 			}
 		]).allowDiskUse(true).exec();
 
@@ -104,6 +109,11 @@ api.post("/hours/get", (req, res, next) => {
 						$gte: req.body.start,
 						$lte: req.body.end,
 					}
+				}
+			},
+			{
+				$sort: {
+					created: 1
 				}
 			}
 		]).allowDiskUse(true).exec();
