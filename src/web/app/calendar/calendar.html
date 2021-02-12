@@ -120,7 +120,7 @@
 					</div>
 
 					<div class="col-auto">
-						<button type="button" class="btn btn-primary btn-sm" v-on:click="day.add = !day.add">
+						<button type="button" class="btn btn-primary btn-sm" v-on:click="day.edit = null; day.add = !day.add">
 							<b>
 								+
 							</b>
@@ -128,22 +128,26 @@
 					</div>
 				</div>
 
-				<div class="mb-3" v-if="day.add">
-					<AddEditWorkerHours
-						v-bind:date="moment(weekStartDate).day(i + 1)"
-						v-on:done="onAddHours(i, $event)"
-						v-on:cancel="day.add = false"
-					></AddEditWorkerHours>
+				<div class="row g-0 justify-content-end mb-3 mb-md-0" v-if="day.add">
+					<div class="col-12 col-md-6 col-lg-4 col-xxl-3 position-relative">
+						<AddEditWorkerHours
+							v-bind:date="moment(weekStartDate).day(i + 1)"
+							v-on:done="onAddHours(i, $event)"
+							v-on:cancel="day.add = false"
+						></AddEditWorkerHours>
+					</div>
 				</div>
 
-				<div class="mb-3" v-if="day.edit">
-					<AddEditWorkerHours
-						v-bind:date="moment(day.edit.date)"
-						v-bind:hours="day.edit"
-						v-on:done="onEditDeleteHours(i, $event)"
-						v-on:cancel="day.edit = null"
-						v-on:deleted="onEditDeleteHours(i)"
-					></AddEditWorkerHours>
+				<div class="row g-0 justify-content-end mb-3 mb-md-0" v-if="day.edit">
+					<div class="col-12 col-md-6 col-lg-4 col-xxl-3 position-relative">
+						<AddEditWorkerHours
+							v-bind:date="moment(day.edit.date)"
+							v-bind:hours="day.edit"
+							v-on:done="onEditDeleteHours(i, $event)"
+							v-on:cancel="day.edit = null"
+							v-on:deleted="onEditDeleteHours(i)"
+						></AddEditWorkerHours>
+					</div>
 				</div>
 
 				<div class="hours border border-primary rounded p-2 mb-3">
@@ -172,7 +176,7 @@
 									<div class="col-auto" v-for="workerHour of worker.hours">
 										<button
 											class="btn btn-sm btn-outline-primary"
-											v-on:click="day.edit = workerHour"
+											v-on:click="day.add = false; day.edit = workerHour"
 										>
 											({{ workerHour.start }} - {{ workerHour.end }})
 										</button>
