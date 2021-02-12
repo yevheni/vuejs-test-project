@@ -91,7 +91,7 @@
 		</div>
 
 		<div class="weekdays">
-			<div class="weekday mb-4" v-for="(day, i) of weekdays">
+			<div class="weekday mb-5" v-for="(day, i) of weekdays">
 				<div class="row gx-2 mb-2">
 					<div class="col">
 						<h5 class="mb-2">
@@ -174,7 +174,7 @@
 					</div>
 				</div>
 
-				<div class="hours border border-primary-light rounded p-2 mb-2">
+				<div class="hours border border-primary rounded p-2 mb-3">
 					<div class="hour p-1" v-for="hour of 24">
 						<div class="mb-1">
 							{{ hour - 1 }}
@@ -187,14 +187,14 @@
 				</div>
 
 				<div class="workers">
-					<div class="worker" v-for="worker of getDayWorkers(i + 1)">
-						<span class="me-3">
+					<div class="worker mb-2" v-for="worker of getDayWorkers(i + 1)">
+						<b class="text-primary me-3">
 							{{ worker.name }}
-						</span>
+						</b>
 
-						<span class="me-2" v-for="workerHour of worker.hours">
+						<button class="btn btn-sm btn-outline-primary me-2" v-for="workerHour of worker.hours">
 							({{ workerHour.start }} - {{ workerHour.end }})
-						</span>
+						</button>
 					</div>
 				</div>
 			</div>
