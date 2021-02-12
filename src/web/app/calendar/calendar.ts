@@ -53,7 +53,7 @@ export const Calendar = Base.extend({
 			this.init().catch(this.errorHandle);
 		},
 
-		onEditHours(index: number, hours: any) {
+		onEditDeleteHours(index: number, hours?: any) {
 			this.weekdays[index].edit = null;
 			this.init().catch(this.errorHandle);
 		},

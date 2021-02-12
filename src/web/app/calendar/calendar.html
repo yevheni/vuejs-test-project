@@ -126,8 +126,9 @@
 					<AddEditWorkerHours
 						v-bind:date="moment(day.edit.date)"
 						v-bind:hours="day.edit"
-						v-on:done="onEditHours(i, $event)"
+						v-on:done="onEditDeleteHours(i, $event)"
 						v-on:cancel="day.edit = null"
+						v-on:deleted="onEditDeleteHours(i)"
 					></AddEditWorkerHours>
 				</div>
 
@@ -143,21 +144,30 @@
 					</div>
 				</div>
 
-				<div class="workers">
-					<div class="worker mb-2" v-for="worker of getDayWorkers(i + 1)">
-						<b class="text-primary me-3">
-							{{ worker.name }}
-						</b>
+				<table class="workers">
+					<tbody>
+						<tr class="worker" v-for="worker of getDayWorkers(i + 1)">
+							<td class="td-auto pe-3 align-top">
+								<b class="text-primary">
+									{{ worker.name }}
+								</b>
+							</td>
 
-						<button
-							class="btn btn-sm btn-outline-primary me-2"
-							v-for="workerHour of worker.hours"
-							v-on:click="day.edit = workerHour"
-						>
-							({{ workerHour.start }} - {{ workerHour.end }})
-						</button>
-					</div>
-				</div>
+							<td class="pb-2">
+								<div class="row g-2">
+									<div class="col-auto" v-for="workerHour of worker.hours">
+										<button
+											class="btn btn-sm btn-outline-primary"
+											v-on:click="day.edit = workerHour"
+										>
+											({{ workerHour.start }} - {{ workerHour.end }})
+										</button>
+									</div>
+								</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
 			</div>
 		</div>
 	</div>
