@@ -77,4 +77,42 @@ api.post("/workers/update", (req, res, next) => {
 	})().catch(next);
 });
 
+api.post("/hours/create", (req, res, next) => {
+	(async () => {
+		/** Create hours */
+		const hoursDoc = await db.models.hours.create({
+			worker: req.body.worker,
+			start: req.body.start,
+			end: req.body.end,
+			date: req.body.date,
+		});
+
+		/** Send response */
+		res.json({
+			hours: hoursDoc.toJSON(),
+		});
+	})().catch(next);
+});
+
+api.post("/hours/get", (req, res, next) => {
+	(async () => {
+		/** Get hours */
+		const hours = await db.models.hours.aggregate([
+			{
+				$match: {
+					date: {
+						$gte: req.body.start,
+						$lte: req.body.end,
+					}
+				}
+			}
+		]).allowDiskUse(true).exec();
+
+		/** Send response */
+		res.json({
+			hours: hours
+		});
+	})().catch(next);
+});
+
 export {api};

@@ -10,6 +10,12 @@ export class MongoConnector extends Mongo {
 				// index: true,
 			},
 		}),
+		"hours": this.model("hours", {
+			worker: {
+				type: String,
+				index: true,
+			},
+		}),
 	};
 
 	constructor(config: MongoConfig) {
