@@ -24,7 +24,7 @@ module.exports = {
 		path: distDir,
 		filename: `js/[name].js`,
 		chunkFilename: `js/[name].js`,
-		publicPath: `/assets/`
+		publicPath: `/`
 	},
 	devServer: {
 		contentBase: sourceDir,
