@@ -47,13 +47,6 @@ module.exports = {
 		]
 	},
 	plugins: [
-		new CopyPlugin({
-			patterns: [
-				{
-					from: path.join(__dirname, `src/server/modules/posts/logos`),
-					to: path.join(__dirname, `dist/server/logos`),
-				},
-			]
-		}),
+		//
 	],
 };

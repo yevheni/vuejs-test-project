@@ -7,7 +7,7 @@
 		"server:build": "webpack --config webpack.server.config.js --mode production",
 		"web:serve": "webpack serve --config webpack.web.config.js --port 9191 --mode development",
 		"web:build": "webpack --config webpack.web.config.js --mode production",
-		"build": "rm -rf dist && npm run server:build",
+		"build": "rm -rf dist && npm run server:build && npm run web:build",
 		"deploy": "npm run build && chmod +x ./deploy && ./deploy"
 	},
 	"author": "",
