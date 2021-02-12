@@ -136,4 +136,18 @@ api.post("/hours/update", (req, res, next) => {
 	})().catch(next);
 });
 
+api.post("/hours/delete", (req, res, next) => {
+	(async () => {
+		/** Delete hours document */
+		await db.models.hours.deleteOne({
+			_id: req.body.id,
+		});
+
+		/** Send response */
+		res.json({
+			status: "success"
+		});
+	})().catch(next);
+});
+
 export {api};
