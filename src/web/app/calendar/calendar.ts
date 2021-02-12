@@ -4,6 +4,7 @@ import {Base} from "../../helpers/base";
 import moment, {unitOfTime} from "moment";
 import {IHour} from "../../interfaces/hour";
 import {IWorker} from "../../interfaces/worker";
+import {AddEditWorkerHours} from "../add-edit-worker-hours/add-edit-worker-hours";
 
 export const Calendar = Base.extend({
 	template: template,
@@ -18,10 +19,8 @@ export const Calendar = Base.extend({
 			weekdays: Array(7).fill(null).map((el, i) => {
 				return {
 					text: moment().weekday(i + 1).format("dddd"),
-					show: false,
-					worker: "",
-					start: "",
-					end: "",
+					add: false,
+					edit: null as IHour,
 				}
 			}),
 			workers: this.$store.state.workers,
@@ -38,7 +37,7 @@ export const Calendar = Base.extend({
 			});
 			const hours = hoursRes.data.hours;
 
-			console.log("hours:", hours);
+			// console.log("hours:", hours);
 
 			this.hours = hours;
 		},
@@ -49,34 +48,14 @@ export const Calendar = Base.extend({
 			this.init().catch(this.errorHandle);
 		},
 
-		async addHours(weekdayIndex: number) {
-			try {
-				/** Parse hours document */
-				const weekday = this.weekdays[weekdayIndex];
-				const date = moment(this.weekStartDate).day(weekdayIndex + 1);
-				const hours = {
-					worker: weekday.worker,
-					start: weekday.start,
-					end: weekday.end,
-					date: date.valueOf(),
-				};
+		onAddHours(index: number, hours: any) {
+			this.weekdays[index].add = false;
+			this.init().catch(this.errorHandle);
+		},
 
-				// console.log(hours);
-
-				/** Create hours document */
-				const hoursRes = await this.api.post("/hours/create", hours);
-				const createdHours = hoursRes.data.hours;
-
-				console.log(createdHours);
-
-				/** Reset weekday */
-				weekday.worker = "";
-				weekday.start = "";
-				weekday.end = "";
-				weekday.show = false;
-			} catch (err) {
-				this.errorHandle(err);
-			}
+		onEditHours(index: number, hours: any) {
+			this.weekdays[index].edit = null;
+			this.init().catch(this.errorHandle);
 		},
 
 		getDayHours(day: number, hour: number) {
@@ -94,5 +73,9 @@ export const Calendar = Base.extend({
 
 	created() {
 		this.init().catch(this.errorHandle);
+	},
+
+	components: {
+		AddEditWorkerHours: AddEditWorkerHours,
 	}
 });

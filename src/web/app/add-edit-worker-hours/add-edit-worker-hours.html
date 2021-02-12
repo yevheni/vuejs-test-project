@@ -1,0 +1,79 @@
+<div class="add-edit-worker-hours">
+	<div class="bg-white rounded shadow p-3">
+		<form v-on:submit.prevent="onSubmit">
+			<div class="mb-3" v-if="!hours">
+				<label class="label mb-2">
+					Select worker
+				</label>
+
+				<div class="row g-2">
+					<div class="col-auto" v-for="worker of workers">
+						<button
+							type="button"
+							class="btn btn-sm"
+							v-on:click="workerId = worker._id"
+							v-bind:class="workerId === worker._id ? 'btn-primary' : 'btn-outline-primary'"
+						>
+							{{ worker.name }}
+						</button>
+					</div>
+				</div>
+			</div>
+
+			<div class="mb-3" v-if="hours">
+				<label class="label mb-2">
+					Worker
+				</label>
+
+				<div class="">
+					<button
+						type="button"
+						class="btn btn-sm btn-primary"
+					>
+						{{ getWorker(hours.worker)?.name }}
+					</button>
+				</div>
+			</div>
+
+			<label class="label mb-2">
+				Select hours
+			</label>
+
+			<div class="row g-2 mb-3">
+				<div class="col-12">
+					<select class="form-select" v-model="start">
+						<option value="">
+							Start
+						</option>
+						<option v-for="hour of 24" v-bind:value="hour - 1">
+							{{ hour - 1 }}
+						</option>
+					</select>
+				</div>
+
+				<div class="col-12">
+					<select class="form-select" v-model="end">
+						<option value="">
+							End
+						</option>
+						<option v-for="hour of 24" v-bind:value="hour - 1">
+							{{ hour - 1 }}
+						</option>
+					</select>
+				</div>
+			</div>
+
+			<div class="text-end">
+				<button type="button" class="btn btn-secondary" v-on:click="$emit('cancel')">
+					Cancel
+				</button>
+
+				<button type="submit" class="btn btn-primary">
+					<b>
+						{{ hours ? "Save" : "Add" }}
+					</b>
+				</button>
+			</div>
+		</form>
+	</div>
+</div>
