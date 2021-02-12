@@ -26,5 +26,11 @@
 		//	grid-template-columns: auto auto 1fr;
 		//	grid-template-rows: 1fr;
 		//}
+
+		.hours {
+			display: grid;
+			grid-template-columns: repeat(6, 1fr);
+			grid-template-rows: 1fr;
+		}
 	}
 }

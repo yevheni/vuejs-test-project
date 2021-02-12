@@ -15,7 +15,7 @@ export const Calendar = Base.extend({
 			},
 			weekdays: Array(7).fill(null).map((el, i) => {
 				return {
-					text: moment().weekday(i + 1).format("dd"),
+					text: moment().weekday(i + 1).format("dddd"),
 				}
 			}),
 		}
