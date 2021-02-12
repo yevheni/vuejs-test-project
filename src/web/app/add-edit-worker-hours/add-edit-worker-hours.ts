@@ -13,10 +13,19 @@ export const AddEditWorkerHours = Base.extend({
 	data() {
 		return {
 			workers: this.$store.state.workers,
-			workerId: this.hours?.worker || "",
-			start: this.hours?.start || "",
-			end: this.hours?.end || "",
 		}
+	},
+
+	computed: {
+		workerId: function() {
+			return this.hours?.worker || ""
+		},
+		start: function() {
+			return this.hours?.start || ""
+		},
+		end: function() {
+			return this.hours?.end || ""
+		},
 	},
 
 	methods: {
@@ -71,5 +80,7 @@ export const AddEditWorkerHours = Base.extend({
 				this.errorHandle(err);
 			}
 		}
-	}
+	},
+
+
 });
