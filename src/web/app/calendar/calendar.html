@@ -92,7 +92,7 @@
 
 		<div class="weekdays">
 			<div class="weekday mb-4" v-for="(day, i) of weekdays">
-				<div class="row gx-2">
+				<div class="row gx-2 mb-2">
 					<div class="col">
 						<h5 class="mb-2">
 							<span class="day">
@@ -114,7 +114,7 @@
 					</div>
 				</div>
 
-				<div class="add-worker-hours my-2" v-if="day.show">
+				<div class="add-worker-hours mb-2" v-if="day.show">
 					<div class="bg-white rounded shadow p-3">
 						<form v-on:submit.prevent="addHours(i)">
 							<label class="label mb-2">
@@ -174,8 +174,8 @@
 					</div>
 				</div>
 
-				<div class="hours">
-					<div class="hour mb-2" v-for="hour of 24">
+				<div class="hours border border-primary-light rounded p-2">
+					<div class="hour p-1" v-for="hour of 24">
 						<div class="mb-1">
 							{{ hour - 1 }}
 						</div>
