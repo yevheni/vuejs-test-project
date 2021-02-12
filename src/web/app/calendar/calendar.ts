@@ -44,6 +44,11 @@ export const Calendar = Base.extend({
 
 		updateDate(inc: number, unit: unitOfTime.Base) {
 			this.weekStartDate.add(inc, unit);
+
+			if (unit === "month" || unit === "year") {
+				this.weekStartDate.day(1);
+			}
+
 			this.$forceUpdate();
 			this.init().catch(this.errorHandle);
 		},

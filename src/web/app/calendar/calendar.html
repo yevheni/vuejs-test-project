@@ -1,92 +1,106 @@
 <div class="calendar">
 	<div class="bg-white rounded shadow p-4 mb-4">
-		<div class="year row gx-3 mb-3 align-items-center">
-<!--			<div class="col-auto">-->
-<!--				<button-->
-<!--					type="button"-->
-<!--					class="btn btn-primary-light btn-sm text-primary"-->
-<!--					v-on:click="updateDate(-1, 'year')"-->
-<!--				>-->
-<!--					<-->
-<!--				</button>-->
-<!--			</div>-->
+		<div class="row g-2 g-md-4 g-lg-5 align-items-center mb-5">
+			<div class="col-12 col-md-4 order-md-2">
+				<div class="border border-primary-light rounded p-3">
+					<div class="year row gx-3 align-items-center">
+						<div class="col-auto">
+							<button
+								type="button"
+								class="btn btn-primary-light btn-sm text-primary"
+								v-on:click="updateDate(-1, 'year')"
+							>
+								<
+							</button>
+						</div>
 
-			<div class="col">
-				<h3 class="text-center mb-0">
-					{{ weekStartDate.format("YYYY") }}
-					{{
-						weekStartDate.format("YYYY") !== weekEndDate.format("YYYY") ? weekEndDate.format(" / YYYY") : ""
-					}}
-				</h3>
+						<div class="col">
+							<h3 class="text-center mb-0">
+								{{ weekStartDate.format("YYYY") }}
+								{{
+									weekStartDate.format("YYYY") !== weekEndDate.format("YYYY") ? weekEndDate.format(" / YYYY") : ""
+								}}
+							</h3>
+						</div>
+
+						<div class="col-auto">
+							<button
+								type="button"
+								class="btn btn-primary-light btn-sm text-primary"
+								v-on:click="updateDate(1, 'year')"
+							>
+								>
+							</button>
+						</div>
+					</div>
+				</div>
 			</div>
 
-<!--			<div class="col-auto">-->
-<!--				<button-->
-<!--					type="button"-->
-<!--					class="btn btn-primary-light btn-sm text-primary"-->
-<!--					v-on:click="updateDate(1, 'year')"-->
-<!--				>-->
-<!--					>-->
-<!--				</button>-->
-<!--			</div>-->
-		</div>
+			<div class="col-12 col-md-4 order-md-1">
+				<div class="border border-primary-light rounded p-3">
+					<div class="month row gx-3 align-items-center">
+						<div class="col-auto">
+							<button
+								type="button"
+								class="btn btn-primary-light btn-sm text-primary"
+								v-on:click="updateDate(-1, 'month')"
+							>
+								<
+							</button>
+						</div>
 
-		<div class="month row gx-3 mb-3 align-items-center">
-			<div class="col-auto">
-				<button
-					type="button"
-					class="btn btn-primary-light btn-sm text-primary"
-					v-on:click="updateDate(-1, 'month')"
-				>
-					<
-				</button>
+						<div class="col">
+							<h3 class="text-center mb-0">
+								{{ weekStartDate.format("MMMM") }}
+								{{
+									weekStartDate.format("MMMM") !== weekEndDate.format("MMMM") ? weekEndDate.format(" / MMMM") : ""
+								}}
+							</h3>
+						</div>
+
+						<div class="col-auto">
+							<button
+								type="button"
+								class="btn btn-primary-light btn-sm text-primary"
+								v-on:click="updateDate(1, 'month')"
+							>
+								>
+							</button>
+						</div>
+					</div>
+				</div>
 			</div>
 
-			<div class="col">
-				<h3 class="text-center mb-0">
-					{{ weekStartDate.format("MMMM") }}
-					{{
-						weekStartDate.format("MMMM") !== weekEndDate.format("MMMM") ? weekEndDate.format(" / MMMM") : ""
-					}}
-				</h3>
-			</div>
+			<div class="col-12 col-md-4 order-md-0">
+				<div class="border border-primary-light rounded p-3">
+					<div class="week row gx-3 align-items-center">
+						<div class="col-auto">
+							<button
+								type="button"
+								class="btn btn-primary-light btn-sm text-primary"
+								v-on:click="updateDate(-7, 'days')"
+							>
+								<
+							</button>
+						</div>
 
-			<div class="col-auto">
-				<button
-					type="button"
-					class="btn btn-primary-light btn-sm text-primary"
-					v-on:click="updateDate(1, 'month')"
-				>
-					>
-				</button>
-			</div>
-		</div>
+						<div class="col">
+							<h3 class="text-center mb-0">
+								{{ weekStartDate.format("DD") }} - {{ weekEndDate.format("DD") }}
+							</h3>
+						</div>
 
-		<div class="week row gx-3 mb-5 align-items-center">
-			<div class="col-auto">
-				<button
-					type="button"
-					class="btn btn-primary-light btn-sm text-primary"
-					v-on:click="updateDate(-7, 'days')"
-				>
-					<
-				</button>
-			</div>
-
-			<div class="col">
-				<h3 class="text-center mb-0">
-					{{ weekStartDate.format("DD") }} - {{ weekEndDate.format("DD") }}
-				</h3>
-			</div>
-
-			<div class="col-auto">
-				<button
-					type="button"
-					class="btn btn-primary-light btn-sm text-primary"
-					v-on:click="updateDate(7, 'days')"
-				>
-					>
-				</button>
+						<div class="col-auto">
+							<button
+								type="button"
+								class="btn btn-primary-light btn-sm text-primary"
+								v-on:click="updateDate(7, 'days')"
+							>
+								>
+							</button>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 
