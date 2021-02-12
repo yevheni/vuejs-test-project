@@ -35,15 +35,15 @@
 				</div>
 			</div>
 
-			<label class="label mb-2">
-				Select hours
-			</label>
-
 			<div class="row g-2 mb-3">
 				<div class="col-12">
-					<select class="form-select" v-model="start">
+					<label for="start" class="label">
+						Start hour
+					</label>
+
+					<select id="start" class="form-select" v-model="start">
 						<option value="">
-							Start
+							Select hour
 						</option>
 						<option v-for="hour of 24" v-bind:value="hour - 1">
 							{{ hour - 1 }}
@@ -52,9 +52,13 @@
 				</div>
 
 				<div class="col-12">
-					<select class="form-select" v-model="end">
+					<label for="end" class="label">
+						End hour
+					</label>
+
+					<select id="end" class="form-select" v-model="end">
 						<option value="">
-							End
+							Select hour
 						</option>
 						<option v-for="hour of 24" v-bind:value="hour - 1">
 							{{ hour - 1 }}
@@ -63,16 +67,30 @@
 				</div>
 			</div>
 
-			<div class="text-end">
-				<button type="button" class="btn btn-secondary" v-on:click="$emit('cancel')">
-					Cancel
-				</button>
+			<div class="row g-2">
+				<div class="col-auto" v-if="hours">
+					<button type="button" class="btn btn-danger text-white" v-on:click="deleteHours">
+						<b>
+							Delete
+						</b>
+					</button>
+				</div>
 
-				<button type="submit" class="btn btn-primary">
-					<b>
-						{{ hours ? "Save" : "Add" }}
-					</b>
-				</button>
+				<div class="col"></div>
+
+				<div class="col-auto">
+					<button type="button" class="btn btn-secondary" v-on:click="$emit('cancel')">
+						Cancel
+					</button>
+				</div>
+
+				<div class="col-auto">
+					<button type="submit" class="btn btn-primary">
+						<b>
+							{{ hours ? "Save" : "Add" }}
+						</b>
+					</button>
+				</div>
 			</div>
 		</form>
 	</div>

@@ -58,6 +58,18 @@ export const AddEditWorkerHours = Base.extend({
 			} catch (err) {
 				this.errorHandle(err);
 			}
+		},
+
+		async deleteHours() {
+			try {
+				await this.api.post("/hours/delete", {
+					id: this.hours._id,
+				});
+
+				this.$emit("deleted");
+			} catch(err) {
+				this.errorHandle(err);
+			}
 		}
 	}
 });
