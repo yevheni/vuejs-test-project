@@ -53,6 +53,11 @@ api.post("/workers/delete", (req, res, next) => {
 			_id: id
 		});
 
+		/** Delete hours */
+		await db.models.hours.deleteMany({
+			worker: id
+		});
+
 		/** Send response */
 		res.json({
 			status: "success",
