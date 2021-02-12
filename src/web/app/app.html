@@ -2,7 +2,7 @@
 	<div class="head bg-white shadow-lg">
 		<div class="container py-4">
 			<div class="px-4">
-				<div class="row gx-2">
+				<div class="row gx-2 align-items-center">
 					<div class="col-auto">
 						<h3 class="mb-0">
 							<a href="/">
@@ -16,11 +16,13 @@
 					<div class="col-auto" v-for="btn of nav_buttons">
 						<button
 							type="button"
-							class="btn btn-sm"
+							class="btn"
 							v-bind:class="btn.id === view ? 'btn-primary' : 'btn-outline-primary'"
 							v-on:click="view = btn.id"
 						>
-							{{ btn.text }}
+							<b>
+								{{ btn.text }}
+							</b>
 						</button>
 					</div>
 				</div>
