@@ -13,19 +13,10 @@ export const AddEditWorkerHours = Base.extend({
 	data() {
 		return {
 			workers: this.$store.state.workers,
+			workerId: this.hours?.worker || "",
+			start: this.hours?.start || "",
+			end: this.hours?.end || ""
 		}
-	},
-
-	computed: {
-		workerId: function() {
-			return this.hours?.worker || ""
-		},
-		start: function() {
-			return this.hours?.start || ""
-		},
-		end: function() {
-			return this.hours?.end || ""
-		},
 	},
 
 	methods: {
@@ -38,8 +29,8 @@ export const AddEditWorkerHours = Base.extend({
 				if (!this.workerId) throw new Error(`Worker not selected`);
 				if (this.start === "") throw new Error(`Start hours not selected`);
 				if (this.end === "") throw new Error(`End hours not selected`);
-				if (this.start >= this.end) throw new Error(`Start hour can't be greater than end hour`);
-				if (this.end <= this.start) throw new Error(`End hour can't be lower than start hour`);
+				if (this.start >= this.end) throw new Error(`Start hour can't be greater or equal than end hour`);
+				if (this.end <= this.start) throw new Error(`End hour can't be lower or equal than start hour`);
 
 				if (this.hours) {
 					/** Update */

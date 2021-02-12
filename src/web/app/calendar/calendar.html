@@ -141,6 +141,7 @@
 				<div class="row g-0 justify-content-end mb-3 mb-md-0" v-if="edit?.index === i">
 					<div class="col-12 col-md-6 col-lg-4 col-xxl-3 position-relative">
 						<AddEditWorkerHours
+							v-bind:key="edit.hours._id"
 							v-bind:date="moment(edit.hours.date)"
 							v-bind:hours="edit.hours"
 							v-on:done="onEditDeleteHours"
