@@ -31,6 +31,26 @@
 			display: grid;
 			grid-template-columns: repeat(6, 1fr);
 			grid-template-rows: 1fr;
+
+			.worker-hours {
+				//display: flex;
+
+				.worker-hour {
+					$size: 5px;
+					//width: $size;
+					height: $size;
+					//border-radius: $size;
+					//margin: 1px;
+					background-color: $primary;
+				}
+			}
+
+			@media (min-width: 576px) {
+				grid-template-columns: repeat(12, 1fr);
+			}
+			@media (min-width: 992px) {
+				grid-template-columns: repeat(24, 1fr);
+			}
 		}
 	}
 }

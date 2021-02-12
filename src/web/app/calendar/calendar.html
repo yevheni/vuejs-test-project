@@ -106,7 +106,7 @@
 					</div>
 
 					<div class="col-auto">
-						<button type="button" class="btn btn-primary btn-sm" v-on:click="showAddHours = true">
+						<button type="button" class="btn btn-primary btn-sm" v-on:click="day.show = !day.show">
 							<b>
 								+
 							</b>
@@ -114,9 +114,75 @@
 					</div>
 				</div>
 
+				<div class="add-worker-hours my-2" v-if="day.show">
+					<div class="bg-white rounded shadow p-3">
+						<form v-on:submit.prevent="addHours(i)">
+							<label class="label mb-2">
+								Select worker
+							</label>
+
+							<div class="row g-2 mb-3">
+								<div class="col-auto" v-for="worker of workers">
+									<button
+										type="button"
+										class="btn btn-sm"
+										v-on:click="day.worker = worker._id"
+										v-bind:class="day.worker === worker._id ? 'btn-primary' : 'btn-outline-primary'"
+									>
+										{{ worker.name }}
+									</button>
+								</div>
+							</div>
+
+
+							<label class="label mb-2">
+								Select hours
+							</label>
+
+							<div class="row g-2 mb-3">
+								<div class="col-12">
+									<select class="form-select" v-model="day.start">
+										<option value="">
+											Start
+										</option>
+										<option v-for="hour of 24" v-bind:value="hour - 1">
+											{{ hour - 1 }}
+										</option>
+									</select>
+								</div>
+
+								<div class="col-12">
+									<select class="form-select" v-model="day.end">
+										<option value="">
+											End
+										</option>
+										<option v-for="hour of 24" v-bind:value="hour - 1">
+											{{ hour - 1 }}
+										</option>
+									</select>
+								</div>
+							</div>
+
+							<div class="text-end">
+								<button type="submit" class="btn btn-primary">
+									<b>
+										Add
+									</b>
+								</button>
+							</div>
+						</form>
+					</div>
+				</div>
+
 				<div class="hours">
-					<div class="hour" v-for="hour of 24">
-						{{ hour - 1 }}
+					<div class="hour mb-2" v-for="hour of 24">
+						<div class="mb-1">
+							{{ hour - 1 }}
+						</div>
+
+						<div class="worker-hours">
+							<div class="worker-hour" v-for="workerHour of getDayHours(i + 1, hour - 1)"></div>
+						</div>
 					</div>
 				</div>
 			</div>
