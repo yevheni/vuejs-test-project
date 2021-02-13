@@ -4,6 +4,7 @@ import compression from 'compression';
 import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
 import {api} from "./api";
+import path from "path";
 
 const router = express.Router();
 
@@ -24,6 +25,9 @@ router.post("/test", (req, res) => {
 
 /** Api */
 router.use("/api", api);
+
+/** Static */
+router.use(["/", "/*"], express.static(path.join(process.cwd(), "dist/web")))
 
 /** Error handle */
 router.use((err: Error, req: express.Request, res: express.Response, next: express.NextFunction) => {
