@@ -11,7 +11,7 @@ export const Base = Vue.extend({
 	computed: {
 		api: () => {
 			return axios.create({
-				baseURL: "http://localhost:9090/api",
+				baseURL: process.env.mode === "production" ? "/api" : "http://localhost:9090/api",
 			});
 		}
 	},
