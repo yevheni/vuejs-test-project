@@ -35,8 +35,12 @@
 			//grid-row: hours;
 			grid-row: 1;
 			grid-row-end: none;
-			background-color: $primary-light;
+			background-color: transparentize($primary, 0.97);
 			text-align: center;
+
+			&:nth-child(odd) {
+				background-color: transparentize($primary, 0.95);
+			}
 		}
 
 		//.day {
