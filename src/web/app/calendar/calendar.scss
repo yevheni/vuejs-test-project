@@ -12,7 +12,7 @@
 	.week {
 		display: grid;
 		min-width: 100%;
-		grid-template-columns: [days] auto repeat(24, minmax(2.5rem, 1fr));
+		grid-template-columns: [days] minmax(3rem, auto) repeat(24, minmax(2.5rem, 1fr));
 		column-gap: 3px;
 		row-gap: 3px;
 
@@ -36,15 +36,17 @@
 		}
 
 		.day {
-			grid-column: days;
-			background-color: darken(white, 3);
+			grid-column-start: days;
+			grid-column-end: none;
+			//background-color: darken(white, 3);
+			background-color: $primary-light;
 		}
 
 		.worker-hours {
 			background-color: $primary;
 			color: white;
 			height: 0.5rem;
-			box-shadow: $box-shadow;
+			box-shadow: $box-shadow-sm;
 		}
 
 		.worker-info {
@@ -57,7 +59,7 @@
 			margin-bottom: 3px;
 			//margin-left: 2px;
 			border-radius: $border-radius;
-			box-shadow: $box-shadow;
+			box-shadow: $box-shadow-sm;
 		}
 	}
 

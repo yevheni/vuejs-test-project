@@ -28,6 +28,14 @@
 			</div>
 		</div>
 
+<!--		<div class="mb-4">-->
+<!--			<AddEditWorkerHours-->
+<!--				v-bind:date="moment(weekStartDate)"-->
+<!--				v-on:done="onAddHours"-->
+<!--				v-on:cancel="add = null"-->
+<!--			></AddEditWorkerHours>-->
+<!--		</div>-->
+
 		<div class="week-holder">
 			<div class="week px-4 pb-4" :style="{
 			gridTemplateRows: `[hours] minmax(2rem, auto) repeat(${weekdays.length}, minmax(2rem, auto))`
@@ -50,9 +58,17 @@
 					gridRow: i + 2,
 				}"
 				>
-					<b>
-						{{ day.text }}
-					</b>
+					<div class="mb-2">
+						<b>
+							{{ day.text }}
+						</b>
+					</div>
+
+					<!--					<button class="btn btn-sm btn-primary" v-on:click="add = i">-->
+					<!--						<b class="mb-0">-->
+					<!--							+-->
+					<!--						</b>-->
+					<!--					</button>-->
 				</div>
 
 				<div
@@ -108,22 +124,22 @@
 
 		<!--					<div class="col-auto">-->
 		<!--						<button type="button" class="btn btn-primary btn-sm" v-on:click="edit = null; add = i">-->
-		<!--							<h6 class="mb-0">-->
-		<!--								+-->
-		<!--							</h6>-->
+		<!--									<h6 class="mb-0">-->
+		<!--										+-->
+		<!--									</h6>-->
 		<!--						</button>-->
 		<!--					</div>-->
 		<!--				</div>-->
 
-		<!--				<div class="row g-0 justify-content-end mb-3 mb-md-0" v-if="add === i">-->
-		<!--					<div class="col-12 col-md-6 col-lg-4 col-xxl-3 position-relative">-->
-		<!--						<AddEditWorkerHours-->
-		<!--							v-bind:date="moment(weekStartDate).day(i + 1)"-->
-		<!--							v-on:done="onAddHours"-->
-		<!--							v-on:cancel="add = null"-->
-		<!--						></AddEditWorkerHours>-->
-		<!--					</div>-->
-		<!--				</div>-->
+		<!--						<div class="row g-0 justify-content-end mb-3 mb-md-0" v-if="add === i">-->
+		<!--							<div class="col-12 col-md-6 col-lg-4 col-xxl-3 position-relative">-->
+		<!--								<AddEditWorkerHours-->
+		<!--									v-bind:date="moment(weekStartDate).day(i + 1)"-->
+		<!--									v-on:done="onAddHours"-->
+		<!--									v-on:cancel="add = null"-->
+		<!--								></AddEditWorkerHours>-->
+		<!--							</div>-->
+		<!--						</div>-->
 
 		<!--				<div class="row g-0 justify-content-end mb-3 mb-md-0" v-if="edit?.index === i">-->
 		<!--					<div class="col-12 col-md-6 col-lg-4 col-xxl-3 position-relative">-->
