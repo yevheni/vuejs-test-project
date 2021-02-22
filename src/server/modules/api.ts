@@ -33,7 +33,7 @@ api.get("/workers", (req, res, next) => {
 			},
 			{
 				$sort: {
-					created: 1
+					name: 1
 				}
 			}
 		]).allowDiskUse(true).exec();
