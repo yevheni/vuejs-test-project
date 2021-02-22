@@ -28,53 +28,65 @@
 			</div>
 		</div>
 
-		<div class="week ps-4 pb-2 mb-4" :style="{
+		<div class="week-holder">
+			<div class="week" :style="{
 			gridTemplateRows: `[hours] minmax(2rem, auto) repeat(${weekdays.length}, minmax(2rem, auto))`
 		}">
-			<div
-				v-for="(hour, i) of 24"
-				class="hour"
-				:style="{
+				<div
+					v-for="(hour, i) of 24"
+					class="hour"
+					:style="{
 				gridColumn: i + 2
 			}">
-				<b>
-					{{ i }}
-				</b>
-			</div>
+					<b>
+						{{ i }}
+					</b>
+				</div>
 
-			<div
-				v-for="(day, i) of weekdays"
-				class="day"
-				:style="{
+				<div
+					v-for="(day, i) of weekdays"
+					class="day"
+					:style="{
 					gridRow: i + 2,
 				}"
-			>
-				<b>
-					{{ day.text }}
-				</b>
-			</div>
+				>
+					<b>
+						{{ day.text }}
+					</b>
+				</div>
 
-			<div
-				v-for="(hour, i) of hours"
-				class="hours"
-				:style="{
+				<div
+					v-for="(hour, i) of hours"
+					class="hours"
+					:style="{
 					gridRow: i + 2,
 					gridColumnStart: hour.start + 2,
 					gridColumnEnd: hour.end + 2,
 					gridTemplateColumns: `repeat(${hour.end - hour.start}, 2rem)`,
 					gridTemplateRows: `repeat(${hour.hours.length}, auto) 1fr`
 				}"
-			>
-				<div
-					v-for="(workerHour, w) of hour.hours"
-					class="worker-hours"
-					:style="{
+				>
+					<div
+						v-for="(workerHour, w) of hour.hours"
+						class="worker-hours-holder"
+						:style="{
 						gridRow: w + 1,
 						gridColumnStart: workerHour.start + 1,
 						gridColumnEnd: workerHour.end + 1,
 					}"
-				>
-<!--					{{ workerHour.worker }}-->
+					>
+						<div class="worker-hours"></div>
+
+						<div class="worker-info">
+							<span class="worker">
+								{{ workerHour.worker }}
+							</span>
+
+							<b>
+								{{ getFormattedHours(workerHour.start, workerHour.end) }}
+							</b>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>

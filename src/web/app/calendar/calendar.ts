@@ -120,6 +120,10 @@ export const Calendar = Base.extend({
 			this.init().catch(this.errorHandle);
 		},
 
+		getFormattedHours(start: number, end: number) {
+			return `(${start}:00-${end}:00)`;
+		},
+
 		onAddHours(hours: any) {
 			this.add = null;
 			this.init().catch(this.errorHandle);
