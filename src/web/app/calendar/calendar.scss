@@ -10,11 +10,11 @@
 	}
 
 	.week {
-		display: grid;
-		min-width: 100%;
-		grid-template-columns: [days] minmax(3rem, auto) repeat(24, minmax(2.5rem, 1fr));
-		column-gap: 3px;
-		row-gap: 3px;
+		//display: grid;
+		//min-width: 100%;
+		//grid-template-columns: [days] minmax(3rem, auto) repeat(24, minmax(2.5rem, 1fr));
+		//column-gap: 3px;
+		//row-gap: 3px;
 
 		.hour, .day, .worker-hours {
 			padding: 0.3rem 0.6rem;
@@ -23,42 +23,50 @@
 
 		.hours {
 			display: grid;
+			overflow: auto;
 			column-gap: 3px;
-			row-gap: 1px;
+			row-gap: 3px;
+			grid-template-columns: repeat(24, minmax(2.5rem, 1fr));
+			//grid-template-rows: minmax(2.5rem, 1fr);
 			//background-color: #1ecd88;
 		}
 
 		.hour {
-			grid-row: hours;
+			//grid-row: hours;
+			grid-row: 1;
 			grid-row-end: none;
 			background-color: $primary-light;
 			text-align: center;
 		}
 
-		.day {
-			grid-column-start: days;
-			grid-column-end: none;
-			//background-color: darken(white, 3);
-			background-color: $primary-light;
-		}
+		//.day {
+		//	grid-column-start: days;
+		//	//grid-column-end: none;
+		//	background-color: darken(white, 3);
+		//	//background-color: $primary-light;
+		//}
 
 		.worker-hours {
 			background-color: $primary;
 			color: white;
-			height: 0.5rem;
+			height: 0.6rem;
+			padding: 0;
 			box-shadow: $box-shadow-sm;
 		}
 
 		.worker-info {
 			width: max-content;
 			position: relative;
+			//background-color: transparentize($primary, 0.25);
 			background-color: white;
+			//color: white;
 			color: $primary;
-			font-size: 10px;
+			font-size: 12px;
 			padding: 0.2rem 0.4rem;
+			//margin-top: 1px;
 			margin-bottom: 3px;
-			//margin-left: 2px;
-			border-radius: $border-radius;
+			margin-left: 1px;
+			border-radius: $border-radius-sm;
 			box-shadow: $box-shadow-sm;
 		}
 	}

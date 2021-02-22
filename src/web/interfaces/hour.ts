@@ -1,6 +1,8 @@
+import {IWorker} from "./worker";
+
 export interface IHour {
 	_id: string,
-	worker: string,
+	worker: IWorker,
 	start: number,
 	end: number,
 	date: number,

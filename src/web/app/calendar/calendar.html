@@ -28,74 +28,53 @@
 			</div>
 		</div>
 
-<!--		<div class="mb-4">-->
-<!--			<AddEditWorkerHours-->
-<!--				v-bind:date="moment(weekStartDate)"-->
-<!--				v-on:done="onAddHours"-->
-<!--				v-on:cancel="add = null"-->
-<!--			></AddEditWorkerHours>-->
-<!--		</div>-->
-
-		<div class="week-holder">
-			<div class="week px-4 pb-4" :style="{
-			gridTemplateRows: `[hours] minmax(2rem, auto) repeat(${weekdays.length}, minmax(2rem, auto))`
-		}">
-				<div
-					v-for="(hour, i) of 24"
-					class="hour"
-					:style="{
-				gridColumn: i + 2
-			}">
+		<div class="px-4">
+			<div class="mb-4">
+				<button type="button" class="btn btn-primary w-100" v-on:click="add = true">
 					<b>
-						{{ i }}
+						Add hours
+					</b>
+				</button>
+			</div>
+
+			<div class="mb-4" v-if="add">
+				<AddEditWorkerHours
+					:dates="weekdays.map(w => w.date)"
+					v-on:done="onAddHours"
+					v-on:cancel="add = false"
+				></AddEditWorkerHours>
+			</div>
+		</div>
+
+		<div class="week px-4">
+			<div v-for="(day, i) of weekdays" class="weekday mb-4">
+				<div class="mb-2">
+					<b>
+						{{ day.text }}
 					</b>
 				</div>
 
-				<div
-					v-for="(day, i) of weekdays"
-					class="day"
-					:style="{
-					gridRow: i + 2,
-				}"
-				>
-					<div class="mb-2">
+				<div class="hours" :style="{ gridTemplateRows: `minmax(2rem, auto) repeat(${getDayHours(day.day).length}, auto)` }">
+					<div
+						v-for="(hour, i) of 24"
+						class="hour"
+						:style="{ gridColumn: hour }"
+					>
 						<b>
-							{{ day.text }}
+							{{ i }}
 						</b>
 					</div>
 
-					<!--					<button class="btn btn-sm btn-primary" v-on:click="add = i">-->
-					<!--						<b class="mb-0">-->
-					<!--							+-->
-					<!--						</b>-->
-					<!--					</button>-->
-				</div>
-
-				<div
-					v-for="(hour, i) of hours"
-					class="hours"
-					:style="{
-					gridRow: i + 2,
-					gridColumnStart: hour.start + 2,
-					gridColumnEnd: hour.end + 2,
-					gridTemplateColumns: `repeat(${hour.end - hour.start}, minmax(2.5rem, 1fr))`,
-					gridTemplateRows: `repeat(${hour.hours.length}, auto) 1fr`
-				}"
-				>
 					<div
-						v-for="(workerHour, w) of hour.hours"
+						v-for="workerHour of getDayHours(day.day)"
 						class="worker-hours-holder"
-						:style="{
-						gridRow: w + 1,
-						gridColumnStart: workerHour.start + 1,
-						gridColumnEnd: workerHour.end + 1,
-					}"
+						:style="workerHour.style"
 					>
 						<div class="worker-hours"></div>
 
 						<div class="worker-info">
 							<b class="worker">
-								{{ workerHour.worker }}
+								{{ workerHour.worker.name }}
 							</b>
 
 							<span>
@@ -106,6 +85,77 @@
 				</div>
 			</div>
 		</div>
+
+<!--		<div class="week-holder">-->
+<!--			<div class="week px-4 pb-4" :style="{-->
+<!--			gridTemplateRows: `[hours] minmax(2rem, auto) repeat(${weekdays.length}, minmax(2rem, auto))`-->
+<!--		}">-->
+<!--				<div-->
+<!--					v-for="(hour, i) of 24"-->
+<!--					class="hour"-->
+<!--					:style="{-->
+<!--				gridColumn: i + 2-->
+<!--			}">-->
+<!--					<b>-->
+<!--						{{ i }}-->
+<!--					</b>-->
+<!--				</div>-->
+
+<!--				<div-->
+<!--					v-for="(day, i) of weekdays"-->
+<!--					class="day"-->
+<!--					:style="{-->
+<!--					gridRow: i + 2,-->
+<!--				}"-->
+<!--				>-->
+<!--					<div class="mb-2">-->
+<!--						<b>-->
+<!--							{{ day.text }}-->
+<!--						</b>-->
+<!--					</div>-->
+
+<!--					&lt;!&ndash;					<button class="btn btn-sm btn-primary" v-on:click="add = i">&ndash;&gt;-->
+<!--					&lt;!&ndash;						<b class="mb-0">&ndash;&gt;-->
+<!--					&lt;!&ndash;							+&ndash;&gt;-->
+<!--					&lt;!&ndash;						</b>&ndash;&gt;-->
+<!--					&lt;!&ndash;					</button>&ndash;&gt;-->
+<!--				</div>-->
+
+<!--				<div-->
+<!--					v-for="(hour, i) of hours"-->
+<!--					class="hours"-->
+<!--					:style="{-->
+<!--					gridRow: i + 2,-->
+<!--					gridColumnStart: hour.start + 2,-->
+<!--					gridColumnEnd: hour.end + 2,-->
+<!--					gridTemplateColumns: `repeat(${hour.end - hour.start}, minmax(2.5rem, 1fr))`,-->
+<!--					gridTemplateRows: `repeat(${hour.hours.length}, auto) 1fr`-->
+<!--				}"-->
+<!--				>-->
+<!--					<div-->
+<!--						v-for="(workerHour, w) of hour.hours"-->
+<!--						class="worker-hours-holder"-->
+<!--						:style="{-->
+<!--						gridRow: w + 1,-->
+<!--						gridColumnStart: workerHour.start + 1,-->
+<!--						gridColumnEnd: workerHour.end + 1,-->
+<!--					}"-->
+<!--					>-->
+<!--						<div class="worker-hours"></div>-->
+
+<!--						<div class="worker-info">-->
+<!--							<b class="worker">-->
+<!--								{{ workerHour.worker.name }}-->
+<!--							</b>-->
+
+<!--							<span>-->
+<!--								{{ getFormattedHours(workerHour.start, workerHour.end) }}-->
+<!--							</span>-->
+<!--						</div>-->
+<!--					</div>-->
+<!--				</div>-->
+<!--			</div>-->
+<!--		</div>-->
 
 		<!--		<div class="weekdays">-->
 		<!--			<div class="weekday mb-5" v-for="(day, i) of weekdays">-->
