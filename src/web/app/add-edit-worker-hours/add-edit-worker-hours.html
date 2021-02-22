@@ -1,12 +1,12 @@
 <div class="add-edit-worker-hours">
 	<div class="bg-white border border-primary rounded shadow p-3">
 		<form v-on:submit.prevent="onSubmit">
-			<div class="mb-3" v-if="!hours">
+			<div class="mb-3">
 				<label for="worker" class="label">
 					Select worker
 				</label>
 
-				<select name="worker" id="worker" class="form-select">
+				<select name="worker" id="worker" class="form-select" v-model="form.worker">
 					<option value="">
 						Select worker
 					</option>
@@ -29,20 +29,35 @@
 <!--				</div>-->
 			</div>
 
-			<div class="mb-3" v-if="hours">
-				<label class="label mb-2">
-					Worker
+			<div class="mb-3">
+				<label for="date" class="label">
+					Day
 				</label>
 
-				<div class="">
-					<button
-						type="button"
-						class="btn btn-sm btn-primary"
-					>
-						{{ getWorker(hours.worker)?.name }}
-					</button>
-				</div>
+				<select name="date" id="date" class="form-select" v-model="form.date">
+					<option value="">
+						Select day
+					</option>
+					<option v-for="date of dates" :value="date.valueOf()">
+						{{ date.format("dddd (DD)") }}
+					</option>
+				</select>
 			</div>
+
+<!--			<div class="mb-3" v-if="hours">-->
+<!--				<label class="label mb-2">-->
+<!--					Worker-->
+<!--				</label>-->
+
+<!--				<div class="">-->
+<!--					<button-->
+<!--						type="button"-->
+<!--						class="btn btn-sm btn-primary"-->
+<!--					>-->
+<!--						{{ getWorker(hours.worker)?.name }}-->
+<!--					</button>-->
+<!--				</div>-->
+<!--			</div>-->
 
 			<div class="row g-2 mb-3">
 				<div class="col-6">
@@ -50,7 +65,7 @@
 						Start hour
 					</label>
 
-					<select id="start" class="form-select" v-model="start">
+					<select id="start" class="form-select" v-model="form.start">
 						<option value="">
 							Select hour
 						</option>
@@ -65,7 +80,7 @@
 						End hour
 					</label>
 
-					<select id="end" class="form-select" v-model="end">
+					<select id="end" class="form-select" v-model="form.end">
 						<option value="">
 							Select hour
 						</option>
@@ -77,13 +92,13 @@
 			</div>
 
 			<div class="row g-2">
-				<div class="col-auto" v-if="hours">
-					<button type="button" class="btn btn-danger text-white" v-on:click="deleteHours">
-						<b>
-							Delete
-						</b>
-					</button>
-				</div>
+<!--				<div class="col-auto" v-if="hours">-->
+<!--					<button type="button" class="btn btn-danger text-white" v-on:click="deleteHours">-->
+<!--						<b>-->
+<!--							Delete-->
+<!--						</b>-->
+<!--					</button>-->
+<!--				</div>-->
 
 				<div class="col"></div>
 
@@ -96,7 +111,8 @@
 				<div class="col-auto">
 					<button type="submit" class="btn btn-primary">
 						<b>
-							{{ hours ? "Save" : "Add" }}
+<!--							{{ hours ? "Save" : "Add" }}-->
+							Add
 						</b>
 					</button>
 				</div>
