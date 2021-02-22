@@ -119,8 +119,41 @@ api.get("/hours", (req, res, next) => {
 				}
 			},
 			{
+				$lookup: {
+					from: "workers",
+					let: {
+						worker: "$worker"
+					},
+					pipeline: [
+						{
+							$match: {
+								$expr: {
+									$eq: ["$_id", "$$worker"]
+								}
+							}
+						}
+					],
+					as: "worker"
+				}
+			},
+			{
+				$addFields: {
+					worker: {
+						$arrayElemAt: ["$worker", 0]
+					}
+				}
+			},
+			{
+				$match: {
+					$expr: {
+						$ifNull: ["$worker", false]
+					}
+				}
+			},
+			{
 				$sort: {
-					created: 1
+					start: 1,
+					created: 1,
 				}
 			}
 		]).allowDiskUse(true).exec();
