@@ -29,7 +29,7 @@
 		</div>
 
 		<div class="week-holder">
-			<div class="week" :style="{
+			<div class="week px-4 pb-4" :style="{
 			gridTemplateRows: `[hours] minmax(2rem, auto) repeat(${weekdays.length}, minmax(2rem, auto))`
 		}">
 				<div
@@ -62,7 +62,7 @@
 					gridRow: i + 2,
 					gridColumnStart: hour.start + 2,
 					gridColumnEnd: hour.end + 2,
-					gridTemplateColumns: `repeat(${hour.end - hour.start}, 2rem)`,
+					gridTemplateColumns: `repeat(${hour.end - hour.start}, minmax(2.5rem, 1fr))`,
 					gridTemplateRows: `repeat(${hour.hours.length}, auto) 1fr`
 				}"
 				>
@@ -78,13 +78,13 @@
 						<div class="worker-hours"></div>
 
 						<div class="worker-info">
-							<span class="worker">
+							<b class="worker">
 								{{ workerHour.worker }}
-							</span>
-
-							<b>
-								{{ getFormattedHours(workerHour.start, workerHour.end) }}
 							</b>
+
+							<span>
+								{{ getFormattedHours(workerHour.start, workerHour.end) }}
+							</span>
 						</div>
 					</div>
 				</div>

@@ -6,11 +6,13 @@
 
 	.week-holder {
 		overflow: auto;
+		display: flex;
 	}
 
 	.week {
 		display: grid;
-		grid-template-columns: [days] auto repeat(24, 2rem) 1.5rem;
+		min-width: 100%;
+		grid-template-columns: [days] auto repeat(24, minmax(2.5rem, 1fr));
 		column-gap: 3px;
 		row-gap: 3px;
 
@@ -30,6 +32,7 @@
 			grid-row: hours;
 			grid-row-end: none;
 			background-color: $primary-light;
+			text-align: center;
 		}
 
 		.day {
