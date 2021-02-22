@@ -34,7 +34,7 @@ export const AddEditWorkerHours = Base.extend({
 
 				if (this.hours) {
 					/** Update */
-					const hoursRes = await this.api.post("/hours/update", {
+					const hoursRes = await this.api.put("/hours", {
 						id: this.hours._id,
 						start: this.start,
 						end: this.end,
@@ -45,7 +45,7 @@ export const AddEditWorkerHours = Base.extend({
 					this.$emit("done", updatedHours);
 				} else {
 					/** Create */
-					const hoursRes = await this.api.post("/hours/create", {
+					const hoursRes = await this.api.post("/hours", {
 						worker: this.workerId,
 						start: this.start,
 						end: this.end,
@@ -62,8 +62,10 @@ export const AddEditWorkerHours = Base.extend({
 
 		async deleteHours() {
 			try {
-				await this.api.post("/hours/delete", {
-					id: this.hours._id,
+				await this.api.delete("/hours", {
+					params: {
+						id: this.hours._id,
+					}
 				});
 
 				this.$emit("deleted");

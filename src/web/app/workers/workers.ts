@@ -29,8 +29,10 @@ export const Workers = Base.extend({
 				this.edit = null;
 
 				/** Delete worker */
-				const deleteRes = await this.api.post("/workers/delete", {
-					id: id
+				const deleteRes = await this.api.delete("/workers", {
+					params: {
+						id: id
+					}
 				});
 
 				/** Delete worker from store */

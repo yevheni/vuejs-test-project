@@ -25,7 +25,7 @@ export const AddEditWorker = Base.extend({
 
 				if (this.id) {
 					/** Update worker */
-					const workerRes = await this.api.post("/workers/update", {
+					const workerRes = await this.api.put("/workers", {
 						id: this.id,
 						name: name,
 					});
@@ -38,7 +38,7 @@ export const AddEditWorker = Base.extend({
 					this.$emit("done", worker);
 				} else {
 					/** Create worker */
-					const workerRes = await this.api.post("/workers/create", {
+					const workerRes = await this.api.post("/workers", {
 						name: name
 					});
 					const worker = workerRes.data.worker;

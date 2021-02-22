@@ -31,9 +31,11 @@ export const Calendar = Base.extend({
 	methods: {
 		async init() {
 			/** Get hours */
-			const hoursRes = await this.api.post("/hours/get", {
-				start: this.weekStartDate.valueOf(),
-				end: this.weekEndDate.valueOf(),
+			const hoursRes = await this.api.get("/hours", {
+				params: {
+					start: this.weekStartDate.valueOf(),
+					end: this.weekEndDate.valueOf(),
+				},
 			});
 			const hours = hoursRes.data.hours;
 
