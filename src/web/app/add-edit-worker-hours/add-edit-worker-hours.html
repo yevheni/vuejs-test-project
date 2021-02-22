@@ -2,22 +2,31 @@
 	<div class="bg-white border border-primary rounded shadow p-3">
 		<form v-on:submit.prevent="onSubmit">
 			<div class="mb-3" v-if="!hours">
-				<label class="label">
+				<label for="worker" class="label">
 					Select worker
 				</label>
 
-				<div class="row g-2">
-					<div class="col-auto" v-for="worker of workers">
-						<button
-							type="button"
-							class="btn btn-sm"
-							v-on:click="workerId = worker._id"
-							v-bind:class="workerId === worker._id ? 'btn-primary' : 'btn-outline-primary'"
-						>
-							{{ worker.name }}
-						</button>
-					</div>
-				</div>
+				<select name="worker" id="worker" class="form-select">
+					<option value="">
+						Select worker
+					</option>
+					<option v-for="worker of workers" :value="worker._id">
+						{{ worker.name }}
+					</option>
+				</select>
+
+<!--				<div class="row g-2">-->
+<!--					<div class="col-auto" v-for="worker of workers">-->
+<!--						<button-->
+<!--							type="button"-->
+<!--							class="btn btn-sm"-->
+<!--							v-on:click="workerId = worker._id"-->
+<!--							v-bind:class="workerId === worker._id ? 'btn-primary' : 'btn-outline-primary'"-->
+<!--						>-->
+<!--							{{ worker.name }}-->
+<!--						</button>-->
+<!--					</div>-->
+<!--				</div>-->
 			</div>
 
 			<div class="mb-3" v-if="hours">
