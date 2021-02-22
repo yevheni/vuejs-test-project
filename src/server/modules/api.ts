@@ -1,9 +1,10 @@
 import express from 'express';
 import {db} from "./database";
+import {logg} from "@yevheni/logg";
 
 const api = express.Router();
 
-api.post("/workers/create", (req, res, next) => {
+api.post("/workers", (req, res, next) => {
 	(async () => {
 		/** Get worker name */
 		const name = req.body.name;
@@ -44,9 +45,9 @@ api.get("/workers", (req, res, next) => {
 	})().catch(next);
 });
 
-api.post("/workers/delete", (req, res, next) => {
+api.delete("/workers", (req, res, next) => {
 	(async () => {
-		const id = req.body.id;
+		const id = req.query.id;
 
 		/** Delete worker */
 		await db.models.workers.deleteOne({
@@ -65,7 +66,7 @@ api.post("/workers/delete", (req, res, next) => {
 	})().catch(next);
 });
 
-api.post("/workers/update", (req, res, next) => {
+api.put("/workers", (req, res, next) => {
 	(async () => {
 		const id = req.body.id;
 
@@ -87,7 +88,8 @@ api.post("/workers/update", (req, res, next) => {
 	})().catch(next);
 });
 
-api.post("/hours/create", (req, res, next) => {
+/** Hours */
+api.post("/hours", (req, res, next) => {
 	(async () => {
 		/** Create hours */
 		const hoursDoc = await db.models.hours.create({
@@ -104,15 +106,15 @@ api.post("/hours/create", (req, res, next) => {
 	})().catch(next);
 });
 
-api.post("/hours/get", (req, res, next) => {
+api.get("/hours", (req, res, next) => {
 	(async () => {
 		/** Get hours */
 		const hours = await db.models.hours.aggregate([
 			{
 				$match: {
 					date: {
-						$gte: req.body.start,
-						$lte: req.body.end,
+						$gte: parseInt(req.query.start as string),
+						$lte: parseInt(req.query.end as string),
 					}
 				}
 			},
@@ -130,7 +132,7 @@ api.post("/hours/get", (req, res, next) => {
 	})().catch(next);
 });
 
-api.post("/hours/update", (req, res, next) => {
+api.put("/hours", (req, res, next) => {
 	(async () => {
 		/** Get hours document */
 		const hoursDoc = await db.models.hours.findOne({
@@ -151,11 +153,11 @@ api.post("/hours/update", (req, res, next) => {
 	})().catch(next);
 });
 
-api.post("/hours/delete", (req, res, next) => {
+api.delete("/hours", (req, res, next) => {
 	(async () => {
 		/** Delete hours document */
 		await db.models.hours.deleteOne({
-			_id: req.body.id,
+			_id: req.query.id,
 		});
 
 		/** Send response */
