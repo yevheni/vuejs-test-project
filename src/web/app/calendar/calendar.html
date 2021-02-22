@@ -1,116 +1,169 @@
 <div class="calendar container-fluid">
-	<div class="bg-white rounded shadow p-4 mb-4">
-		<div class="row g-2 g-md-4 g-lg-5 align-items-center mb-5">
-			<div class="col-12 col-md-4 order-md-2">
-				<Picker
-					:text="year"
-					v-on:prev="updateDate(-1, 'year')"
-					v-on:next="updateDate(1, 'year')"
-				></Picker>
+	<div class="bg-white rounded shadow mb-4">
+		<div class="p-4 mb-4">
+			<div class="row g-2 g-md-4 g-lg-5 align-items-center">
+				<div class="col-12 col-md-4 order-md-2">
+					<Picker
+						:text="year"
+						v-on:prev="updateDate(-1, 'year')"
+						v-on:next="updateDate(1, 'year')"
+					></Picker>
+				</div>
+
+				<div class="col-12 col-md-4 order-md-1">
+					<Picker
+						:text="month"
+						v-on:prev="updateDate(-1, 'month')"
+						v-on:next="updateDate(1, 'month')"
+					></Picker>
+				</div>
+
+				<div class="col-12 col-md-4 order-md-0">
+					<Picker
+						:text="week"
+						v-on:prev="updateDate(-7, 'days')"
+						v-on:next="updateDate(7, 'days')"
+					></Picker>
+				</div>
+			</div>
+		</div>
+
+		<div class="week ps-4 pb-2 mb-4" :style="{
+			gridTemplateRows: `[hours] minmax(2rem, auto) repeat(${weekdays.length}, minmax(2rem, auto))`
+		}">
+			<div
+				v-for="(hour, i) of 24"
+				class="hour"
+				:style="{
+				gridColumn: i + 2
+			}">
+				<b>
+					{{ i }}
+				</b>
 			</div>
 
-			<div class="col-12 col-md-4 order-md-1">
-				<Picker
-					:text="month"
-					v-on:prev="updateDate(-1, 'month')"
-					v-on:next="updateDate(1, 'month')"
-				></Picker>
+			<div
+				v-for="(day, i) of weekdays"
+				class="day"
+				:style="{
+					gridRow: i + 2,
+				}"
+			>
+				<b>
+					{{ day.text }}
+				</b>
 			</div>
 
-			<div class="col-12 col-md-4 order-md-0">
-				<Picker
-					:text="week"
-					v-on:prev="updateDate(-7, 'days')"
-					v-on:next="updateDate(7, 'days')"
-				></Picker>
+			<div
+				v-for="(hour, i) of hours"
+				class="hours"
+				:style="{
+					gridRow: i + 2,
+					gridColumnStart: hour.start + 2,
+					gridColumnEnd: hour.end + 2,
+					gridTemplateColumns: `repeat(${hour.end - hour.start}, 2rem)`,
+					gridTemplateRows: `repeat(${hour.hours.length}, auto) 1fr`
+				}"
+			>
+				<div
+					v-for="(workerHour, w) of hour.hours"
+					class="worker-hours"
+					:style="{
+						gridRow: w + 1,
+						gridColumnStart: workerHour.start + 1,
+						gridColumnEnd: workerHour.end + 1,
+					}"
+				>
+<!--					{{ workerHour.worker }}-->
+				</div>
 			</div>
 		</div>
 
-		<div class="weekdays">
-			<div class="weekday mb-5" v-for="(day, i) of weekdays">
-				<div class="row gx-2 mb-2">
-					<div class="col">
-						<h5 class="mb-2">
-							<span class="day">
-								{{ day.text }}
-							</span>
+		<!--		<div class="weekdays">-->
+		<!--			<div class="weekday mb-5" v-for="(day, i) of weekdays">-->
+		<!--				<div class="row gx-2 mb-2">-->
+		<!--					<div class="col">-->
+		<!--						<h5 class="mb-2">-->
+		<!--							<span class="day">-->
+		<!--								{{ day.text }}-->
+		<!--							</span>-->
 
-							<span class="date badge bg-primary rounded-pill">
-								{{ moment(weekStartDate).day(i + 1).format("DD") }}
-							</span>
-						</h5>
-					</div>
+		<!--							<span class="date badge bg-primary rounded-pill">-->
+		<!--								{{ moment(weekStartDate).day(i + 1).format("DD") }}-->
+		<!--							</span>-->
+		<!--						</h5>-->
+		<!--					</div>-->
 
-					<div class="col-auto">
-						<button type="button" class="btn btn-primary btn-sm" v-on:click="edit = null; add = i">
-							<h6 class="mb-0">
-								+
-							</h6>
-						</button>
-					</div>
-				</div>
+		<!--					<div class="col-auto">-->
+		<!--						<button type="button" class="btn btn-primary btn-sm" v-on:click="edit = null; add = i">-->
+		<!--							<h6 class="mb-0">-->
+		<!--								+-->
+		<!--							</h6>-->
+		<!--						</button>-->
+		<!--					</div>-->
+		<!--				</div>-->
 
-				<div class="row g-0 justify-content-end mb-3 mb-md-0" v-if="add === i">
-					<div class="col-12 col-md-6 col-lg-4 col-xxl-3 position-relative">
-						<AddEditWorkerHours
-							v-bind:date="moment(weekStartDate).day(i + 1)"
-							v-on:done="onAddHours"
-							v-on:cancel="add = null"
-						></AddEditWorkerHours>
-					</div>
-				</div>
+		<!--				<div class="row g-0 justify-content-end mb-3 mb-md-0" v-if="add === i">-->
+		<!--					<div class="col-12 col-md-6 col-lg-4 col-xxl-3 position-relative">-->
+		<!--						<AddEditWorkerHours-->
+		<!--							v-bind:date="moment(weekStartDate).day(i + 1)"-->
+		<!--							v-on:done="onAddHours"-->
+		<!--							v-on:cancel="add = null"-->
+		<!--						></AddEditWorkerHours>-->
+		<!--					</div>-->
+		<!--				</div>-->
 
-				<div class="row g-0 justify-content-end mb-3 mb-md-0" v-if="edit?.index === i">
-					<div class="col-12 col-md-6 col-lg-4 col-xxl-3 position-relative">
-						<AddEditWorkerHours
-							v-bind:key="edit.hours._id"
-							v-bind:date="moment(edit.hours.date)"
-							v-bind:hours="edit.hours"
-							v-on:done="onEditDeleteHours"
-							v-on:cancel="edit = null"
-							v-on:deleted="onEditDeleteHours"
-						></AddEditWorkerHours>
-					</div>
-				</div>
+		<!--				<div class="row g-0 justify-content-end mb-3 mb-md-0" v-if="edit?.index === i">-->
+		<!--					<div class="col-12 col-md-6 col-lg-4 col-xxl-3 position-relative">-->
+		<!--						<AddEditWorkerHours-->
+		<!--							v-bind:key="edit.hours._id"-->
+		<!--							v-bind:date="moment(edit.hours.date)"-->
+		<!--							v-bind:hours="edit.hours"-->
+		<!--							v-on:done="onEditDeleteHours"-->
+		<!--							v-on:cancel="edit = null"-->
+		<!--							v-on:deleted="onEditDeleteHours"-->
+		<!--						></AddEditWorkerHours>-->
+		<!--					</div>-->
+		<!--				</div>-->
 
-				<!--				<div class="hours border border-primary rounded p-2 mb-3">-->
-				<div class="hours rounded p-2 mb-3">
-					<div class="hour p-1" v-for="hour of 24">
-						<div class="mb-1">
-							{{ hour - 1 }}
-						</div>
+		<!--				&lt;!&ndash;				<div class="hours border border-primary rounded p-2 mb-3">&ndash;&gt;-->
+		<!--				<div class="hours rounded p-2 mb-3">-->
+		<!--					<div class="hour p-1" v-for="hour of 24">-->
+		<!--						<div class="mb-1">-->
+		<!--							{{ hour - 1 }}-->
+		<!--						</div>-->
 
-						<div class="worker-hours">
-							<div class="worker-hour" v-for="workerHour of getDayHours(i + 1, hour - 1)"></div>
-						</div>
-					</div>
-				</div>
+		<!--						<div class="worker-hours">-->
+		<!--							<div class="worker-hour" v-for="workerHour of getDayHours(i + 1, hour - 1)"></div>-->
+		<!--						</div>-->
+		<!--					</div>-->
+		<!--				</div>-->
 
-				<table class="workers">
-					<tbody>
-						<tr class="worker" v-for="worker of getDayWorkers(i + 1)">
-							<td class="td-auto pe-3 align-top">
-								<b class="text-primary">
-									{{ worker.name }}
-								</b>
-							</td>
+		<!--				<table class="workers">-->
+		<!--					<tbody>-->
+		<!--						<tr class="worker" v-for="worker of getDayWorkers(i + 1)">-->
+		<!--							<td class="td-auto pe-3 align-top">-->
+		<!--								<b class="text-primary">-->
+		<!--									{{ worker.name }}-->
+		<!--								</b>-->
+		<!--							</td>-->
 
-							<td class="pb-2">
-								<div class="row g-2">
-									<div class="col-auto" v-for="workerHour of worker.hours">
-										<button
-											class="worker-hours-btn btn btn-sm"
-											v-on:click="add = null; edit = { index: i, hours: workerHour }"
-										>
-											{{ workerHour.start }} - {{ workerHour.end }}
-										</button>
-									</div>
-								</div>
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
+		<!--							<td class="pb-2">-->
+		<!--								<div class="row g-2">-->
+		<!--									<div class="col-auto" v-for="workerHour of worker.hours">-->
+		<!--										<button-->
+		<!--											class="worker-hours-btn btn btn-sm"-->
+		<!--											v-on:click="add = null; edit = { index: i, hours: workerHour }"-->
+		<!--										>-->
+		<!--											{{ workerHour.start }} - {{ workerHour.end }}-->
+		<!--										</button>-->
+		<!--									</div>-->
+		<!--								</div>-->
+		<!--							</td>-->
+		<!--						</tr>-->
+		<!--					</tbody>-->
+		<!--				</table>-->
+		<!--			</div>-->
+		<!--		</div>-->
 	</div>
 </div>

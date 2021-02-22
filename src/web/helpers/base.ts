@@ -20,6 +20,7 @@ export const Base = Vue.extend({
 			console.error(err);
 
 			const message = err.response?.data?.message || err.message;
+
 			alert(message);
 		}
 	},

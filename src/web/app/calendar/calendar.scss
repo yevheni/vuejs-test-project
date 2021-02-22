@@ -4,6 +4,43 @@
 		width: 1%;
 	}
 
+	.week {
+		display: grid;
+		overflow: auto;
+		grid-template-columns: [days] auto repeat(24, 2rem);
+		column-gap: 3px;
+		row-gap: 3px;
+
+		.hour, .day, .worker-hours {
+			padding: 0.3rem 0.6rem;
+			border-radius: $border-radius;
+		}
+
+		.hours {
+			display: grid;
+			column-gap: 3px;
+			row-gap: 1px;
+			//background-color: #1ecd88;
+		}
+
+		.hour {
+			grid-row: hours;
+			grid-row-end: none;
+			background-color: $primary-light;
+		}
+
+		.day {
+			grid-column: days;
+			background-color: darken(white, 3);
+		}
+
+		.worker-hours {
+			background-color: $primary;
+			color: white;
+			height: 1rem;
+		}
+	}
+
 	.weekdays {
 		.hours {
 			display: grid;

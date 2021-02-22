@@ -18,9 +18,13 @@ export const Calendar = Base.extend({
 				return moment(this.weekStartDate).day(7);
 			},
 			weekdays: Array(7).fill(null).map((el, i) => {
+				const day = i + 1;
+				const date = moment().weekday(day);
+
 				return {
-					text: moment().weekday(i + 1).format("dddd"),
-				}
+					day: day,
+					text: date.format("ddd"),
+				};
 			}),
 			workers: this.$store.state.workers,
 			hours: [] as IHour[],
@@ -50,18 +54,59 @@ export const Calendar = Base.extend({
 
 	methods: {
 		async init() {
-			/** Get hours */
-			const hoursRes = await this.api.get("/hours", {
-				params: {
-					start: this.weekStartDate.valueOf(),
-					end: this.weekEndDate.valueOf(),
+			// /** Get hours */
+			// const hoursRes = await this.api.get("/hours", {
+			// 	params: {
+			// 		start: this.weekStartDate.valueOf(),
+			// 		end: this.weekEndDate.valueOf(),
+			// 	},
+			// });
+			// const hours = hoursRes.data.hours;
+			//
+			// // console.log("hours:", hours);
+
+			// this.hours = hours;
+
+			/** Test hours */
+			const testHours = [
+				{
+					_id: "0",
+					worker: "First",
+					start: 0,
+					end: 3,
+					date: Date.now(),
+					created: Date.now(),
+					updated: Date.now(),
 				},
+				{
+					_id: "1",
+					worker: "Second",
+					start: 2,
+					end: 6,
+					date: Date.now(),
+					created: Date.now(),
+					updated: Date.now(),
+				},
+				{
+					_id: "2",
+					worker: "Veeeeeeeeery long worker name",
+					start: 0,
+					end: 1,
+					date: Date.now(),
+					created: Date.now(),
+					updated: Date.now(),
+				},
+			];
+
+			this.hours = this.weekdays.map((day: any) => {
+				const hours = testHours.filter(hour => moment(hour.date).weekday() === day.day);
+
+				return {
+					hours: hours,
+					start: hours.map((el: any) => el.start).sort()[0] || 0,
+					end: hours.map((el: any) => el.end).sort().reverse()[0] || 0,
+				}
 			});
-			const hours = hoursRes.data.hours;
-
-			// console.log("hours:", hours);
-
-			this.hours = hours;
 		},
 
 		updateDate(inc: number, unit: unitOfTime.Base) {
