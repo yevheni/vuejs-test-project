@@ -5,6 +5,7 @@ import moment, {unitOfTime} from "moment";
 import {IHour} from "../../interfaces/hour";
 import {IWorker} from "../../interfaces/worker";
 import {AddEditWorkerHours} from "../add-edit-worker-hours/add-edit-worker-hours";
+import {Picker} from "./picker/picker";
 
 export const Calendar = Base.extend({
 	template: template,
@@ -25,6 +26,25 @@ export const Calendar = Base.extend({
 			hours: [] as IHour[],
 			add: null,
 			edit: null as any,
+
+			get year() {
+				const startYear = this.weekStartDate.format("YYYY");
+				const endYear = this.weekEndDate.format("YYYY");
+
+				return `${startYear}${startYear !== endYear ? ` / ${endYear}` : ""}`;
+			},
+			get month() {
+				const startMonth = this.weekStartDate.format("MMMM");
+				const endMonth = this.weekEndDate.format("MMMM");
+
+				return `${startMonth}${startMonth !== endMonth ? ` / ${endMonth}` : ""}`;
+			},
+			get week() {
+				const startWeek = this.weekStartDate.format("DD");
+				const endWeek = this.weekEndDate.format("DD");
+
+				return `${startWeek} - ${endWeek}`;
+			},
 		}
 	},
 
@@ -84,5 +104,6 @@ export const Calendar = Base.extend({
 
 	components: {
 		AddEditWorkerHours: AddEditWorkerHours,
+		Picker: Picker,
 	}
 });

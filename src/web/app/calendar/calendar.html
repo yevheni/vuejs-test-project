@@ -2,117 +2,27 @@
 	<div class="bg-white rounded shadow p-4 mb-4">
 		<div class="row g-2 g-md-4 g-lg-5 align-items-center mb-5">
 			<div class="col-12 col-md-4 order-md-2">
-				<div class="border bg-primary-light border-primary-light rounded p-2 p-md-3">
-					<div class="year row gx-3 align-items-center">
-						<div class="col-auto">
-							<button
-								type="button"
-								class="btn btn-secondary btn-sm"
-								v-on:click="updateDate(-1, 'year')"
-							>
-								<h6 class="mb-0">
-									{{ "<" }}
-								</h6>
-							</button>
-						</div>
-
-						<div class="col">
-							<h3 class="text-center mb-0">
-								{{ weekStartDate.format("YYYY") }}
-								{{
-									weekStartDate.format("YYYY") !== weekEndDate.format("YYYY") ? weekEndDate.format(" / YYYY") : ""
-								}}
-							</h3>
-						</div>
-
-						<div class="col-auto">
-							<button
-								type="button"
-								class="btn btn-secondary btn-sm"
-								v-on:click="updateDate(1, 'year')"
-							>
-								<h6 class="mb-0">
-									{{ ">" }}
-								</h6>
-							</button>
-						</div>
-					</div>
-				</div>
+				<Picker
+					:text="year"
+					v-on:prev="updateDate(-1, 'year')"
+					v-on:next="updateDate(1, 'year')"
+				></Picker>
 			</div>
 
 			<div class="col-12 col-md-4 order-md-1">
-				<div class="border bg-primary-light border-primary-light rounded p-2 p-md-3">
-					<div class="month row gx-3 align-items-center">
-						<div class="col-auto">
-							<button
-								type="button"
-								class="btn btn-secondary btn-sm"
-								v-on:click="updateDate(-1, 'month')"
-							>
-								<h6 class="mb-0">
-									{{ "<" }}
-								</h6>
-							</button>
-						</div>
-
-						<div class="col">
-							<h3 class="text-center mb-0">
-								{{ weekStartDate.format("MMMM") }}
-								{{
-									weekStartDate.format("MMMM") !== weekEndDate.format("MMMM") ? weekEndDate.format(" / MMMM") : ""
-								}}
-							</h3>
-						</div>
-
-						<div class="col-auto">
-							<button
-								type="button"
-								class="btn btn-secondary btn-sm"
-								v-on:click="updateDate(1, 'month')"
-							>
-								<h6 class="mb-0">
-									{{ ">" }}
-								</h6>
-							</button>
-						</div>
-					</div>
-				</div>
+				<Picker
+					:text="month"
+					v-on:prev="updateDate(-1, 'month')"
+					v-on:next="updateDate(1, 'month')"
+				></Picker>
 			</div>
 
 			<div class="col-12 col-md-4 order-md-0">
-				<div class="border bg-primary-light border-primary-light rounded p-2 p-md-3">
-					<div class="week row gx-3 align-items-center">
-						<div class="col-auto">
-							<button
-								type="button"
-								class="btn btn-secondary btn-sm"
-								v-on:click="updateDate(-7, 'days')"
-							>
-								<h6 class="mb-0">
-									{{ "<" }}
-								</h6>
-							</button>
-						</div>
-
-						<div class="col">
-							<h3 class="text-center mb-0">
-								{{ weekStartDate.format("DD") }} - {{ weekEndDate.format("DD") }}
-							</h3>
-						</div>
-
-						<div class="col-auto">
-							<button
-								type="button"
-								class="btn btn-secondary btn-sm"
-								v-on:click="updateDate(7, 'days')"
-							>
-								<h6 class="mb-0">
-									{{ ">" }}
-								</h6>
-							</button>
-						</div>
-					</div>
-				</div>
+				<Picker
+					:text="week"
+					v-on:prev="updateDate(-7, 'days')"
+					v-on:next="updateDate(7, 'days')"
+				></Picker>
 			</div>
 		</div>
 
