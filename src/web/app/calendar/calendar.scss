@@ -10,12 +10,6 @@
 	}
 
 	.week {
-		//display: grid;
-		//min-width: 100%;
-		//grid-template-columns: [days] minmax(3rem, auto) repeat(24, minmax(2.5rem, 1fr));
-		//column-gap: 3px;
-		//row-gap: 3px;
-
 		.hour, .day, .worker-hours {
 			padding: 0.3rem 0.6rem;
 			border-radius: $border-radius;
@@ -27,12 +21,9 @@
 			column-gap: 3px;
 			row-gap: 3px;
 			grid-template-columns: repeat(24, minmax(2.5rem, 1fr));
-			//grid-template-rows: minmax(2.5rem, 1fr);
-			//background-color: #1ecd88;
 		}
 
 		.hour {
-			//grid-row: hours;
 			grid-row: 1;
 			grid-row-end: none;
 			background-color: transparentize($primary, 0.97);
@@ -42,13 +33,6 @@
 				background-color: transparentize($primary, 0.95);
 			}
 		}
-
-		//.day {
-		//	grid-column-start: days;
-		//	//grid-column-end: none;
-		//	background-color: darken(white, 3);
-		//	//background-color: $primary-light;
-		//}
 
 		.worker-hours {
 			background-color: $primary;
@@ -61,59 +45,28 @@
 		.worker-info {
 			width: max-content;
 			position: relative;
-			//background-color: transparentize($primary, 0.25);
 			background-color: white;
-			//color: white;
-			color: $primary;
-			font-size: 12px;
-			padding: 0.2rem 0.4rem;
-			//margin-top: 1px;
 			margin-bottom: 3px;
 			margin-left: 1px;
 			border-radius: $border-radius-sm;
 			box-shadow: $box-shadow-sm;
-		}
-	}
 
-	.weekdays {
-		.hours {
-			display: grid;
-			grid-template-columns: repeat(6, 1fr);
-			grid-template-rows: 1fr;
-			background-color: transparentize($primary, 0.975);
-			border: 1px solid transparentize($primary, 0.9);
-
-			.worker-hours {
-				$size: 6px;
-				border-radius: $size / 2;
-				overflow: hidden;
-
-				.worker-hour {
-					height: $size;
-					background-color: transparentize($primary, 0.75);
-				}
+			>.btn {
+				color: $primary;
+				font-size: 12px;
+				padding: 0.2rem 0.4rem;
+				border-radius: $border-radius-sm;
 			}
-
-			@media (min-width: 576px) {
-				grid-template-columns: repeat(12, 1fr);
-			}
-			@media (min-width: 992px) {
-				grid-template-columns: repeat(24, 1fr);
-			}
-		}
-
-		.worker-hours-btn {
-			background-color: transparentize($primary, 0.9);
-			color: transparentize($primary, 0.2);
-			font-weight: bold;
 		}
 	}
 
 	@media (min-width: 768px) {
-		.add-edit-worker-hours {
+		.add-edit-worker-hours-holder {
 			position: absolute;
 			z-index: 1;
-			width: 100%;
+			width: auto;
+			right: 0;
+			top: 0;
 		}
 	}
 }

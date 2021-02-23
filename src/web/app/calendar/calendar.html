@@ -29,12 +29,12 @@
 		</div>
 
 		<div class="week px-4">
-			<div v-for="(day, i) of weekdays" class="weekday mb-4">
-				<div class="row g-2 mb-2">
+			<div v-for="(day, i) of weekdays" class="weekday pb-5">
+				<div class="row g-2 mb-3">
 					<div class="col">
-						<b>
+						<h5 class="mb-0">
 							{{ day.text }}
-						</b>
+						</h5>
 					</div>
 
 					<div class="col-auto">
@@ -46,22 +46,43 @@
 					</div>
 				</div>
 
-				<div class="mb-3" v-if="add === i">
-					<AddEditWorkerHours
-						:date="day.date"
-						v-on:done="onAddHours"
-						v-on:cancel="add = -1"
-					></AddEditWorkerHours>
+				<div class="position-relative mb-3" v-if="add === i || edit?.day === day.day">
+					<div class="add-edit-worker-hours-holder">
+						<div class="row g-2">
+							<div class="col-auto" v-if="edit?.day === day.day">
+								<AddEditWorkerHours
+									:date="day.date"
+									:key="edit.hour._id"
+									:id="edit.hour._id"
+									:worker="edit.hour.worker._id"
+									:start="edit.hour.start"
+									:end="edit.hour.end"
+									v-on:done="onEditDeleteHours"
+									v-on:deleted="onEditDeleteHours"
+									v-on:cancel="edit = null"
+								></AddEditWorkerHours>
+							</div>
+
+							<div class="col-auto" v-if="add === i">
+								<AddEditWorkerHours
+									:date="day.date"
+									v-on:done="onAddHours"
+									v-on:cancel="add = -1"
+								></AddEditWorkerHours>
+							</div>
+						</div>
+					</div>
 				</div>
 
-				<div class="hours" :style="{ gridTemplateRows: `minmax(2rem, auto) repeat(${getDayHours(day.day).length}, auto)` }">
+				<div class="hours"
+					 :style="{ gridTemplateRows: `minmax(2rem, auto) repeat(${getDayHours(day.day).length}, auto)` }">
 					<div
-						v-for="(hour, i) of 24"
+						v-for="(hour, h) of 24"
 						class="hour"
 						:style="{ gridColumn: hour }"
 					>
 						<b>
-							{{ i }}
+							{{ h }}
 						</b>
 					</div>
 
@@ -73,175 +94,19 @@
 						<div class="worker-hours"></div>
 
 						<div class="worker-info">
-							<b class="worker">
-								{{ workerHour.worker.name }}
-							</b>
+							<button type="button" class="btn" v-on:click="setEdit(day.day, workerHour)">
+								<b class="worker">
+									{{ workerHour.worker.name }}
+								</b>
 
-							<span>
-								{{ getFormattedHours(workerHour.start, workerHour.end) }}
-							</span>
+								<span>
+									{{ getFormattedHours(workerHour.start, workerHour.end) }}
+								</span>
+							</button>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-
-<!--		<div class="week-holder">-->
-<!--			<div class="week px-4 pb-4" :style="{-->
-<!--			gridTemplateRows: `[hours] minmax(2rem, auto) repeat(${weekdays.length}, minmax(2rem, auto))`-->
-<!--		}">-->
-<!--				<div-->
-<!--					v-for="(hour, i) of 24"-->
-<!--					class="hour"-->
-<!--					:style="{-->
-<!--				gridColumn: i + 2-->
-<!--			}">-->
-<!--					<b>-->
-<!--						{{ i }}-->
-<!--					</b>-->
-<!--				</div>-->
-
-<!--				<div-->
-<!--					v-for="(day, i) of weekdays"-->
-<!--					class="day"-->
-<!--					:style="{-->
-<!--					gridRow: i + 2,-->
-<!--				}"-->
-<!--				>-->
-<!--					<div class="mb-2">-->
-<!--						<b>-->
-<!--							{{ day.text }}-->
-<!--						</b>-->
-<!--					</div>-->
-
-<!--					&lt;!&ndash;					<button class="btn btn-sm btn-primary" v-on:click="add = i">&ndash;&gt;-->
-<!--					&lt;!&ndash;						<b class="mb-0">&ndash;&gt;-->
-<!--					&lt;!&ndash;							+&ndash;&gt;-->
-<!--					&lt;!&ndash;						</b>&ndash;&gt;-->
-<!--					&lt;!&ndash;					</button>&ndash;&gt;-->
-<!--				</div>-->
-
-<!--				<div-->
-<!--					v-for="(hour, i) of hours"-->
-<!--					class="hours"-->
-<!--					:style="{-->
-<!--					gridRow: i + 2,-->
-<!--					gridColumnStart: hour.start + 2,-->
-<!--					gridColumnEnd: hour.end + 2,-->
-<!--					gridTemplateColumns: `repeat(${hour.end - hour.start}, minmax(2.5rem, 1fr))`,-->
-<!--					gridTemplateRows: `repeat(${hour.hours.length}, auto) 1fr`-->
-<!--				}"-->
-<!--				>-->
-<!--					<div-->
-<!--						v-for="(workerHour, w) of hour.hours"-->
-<!--						class="worker-hours-holder"-->
-<!--						:style="{-->
-<!--						gridRow: w + 1,-->
-<!--						gridColumnStart: workerHour.start + 1,-->
-<!--						gridColumnEnd: workerHour.end + 1,-->
-<!--					}"-->
-<!--					>-->
-<!--						<div class="worker-hours"></div>-->
-
-<!--						<div class="worker-info">-->
-<!--							<b class="worker">-->
-<!--								{{ workerHour.worker.name }}-->
-<!--							</b>-->
-
-<!--							<span>-->
-<!--								{{ getFormattedHours(workerHour.start, workerHour.end) }}-->
-<!--							</span>-->
-<!--						</div>-->
-<!--					</div>-->
-<!--				</div>-->
-<!--			</div>-->
-<!--		</div>-->
-
-		<!--		<div class="weekdays">-->
-		<!--			<div class="weekday mb-5" v-for="(day, i) of weekdays">-->
-		<!--				<div class="row gx-2 mb-2">-->
-		<!--					<div class="col">-->
-		<!--						<h5 class="mb-2">-->
-		<!--							<span class="day">-->
-		<!--								{{ day.text }}-->
-		<!--							</span>-->
-
-		<!--							<span class="date badge bg-primary rounded-pill">-->
-		<!--								{{ moment(weekStartDate).day(i + 1).format("DD") }}-->
-		<!--							</span>-->
-		<!--						</h5>-->
-		<!--					</div>-->
-
-		<!--					<div class="col-auto">-->
-		<!--						<button type="button" class="btn btn-primary btn-sm" v-on:click="edit = null; add = i">-->
-		<!--									<h6 class="mb-0">-->
-		<!--										+-->
-		<!--									</h6>-->
-		<!--						</button>-->
-		<!--					</div>-->
-		<!--				</div>-->
-
-		<!--						<div class="row g-0 justify-content-end mb-3 mb-md-0" v-if="add === i">-->
-		<!--							<div class="col-12 col-md-6 col-lg-4 col-xxl-3 position-relative">-->
-		<!--								<AddEditWorkerHours-->
-		<!--									v-bind:date="moment(weekStartDate).day(i + 1)"-->
-		<!--									v-on:done="onAddHours"-->
-		<!--									v-on:cancel="add = null"-->
-		<!--								></AddEditWorkerHours>-->
-		<!--							</div>-->
-		<!--						</div>-->
-
-		<!--				<div class="row g-0 justify-content-end mb-3 mb-md-0" v-if="edit?.index === i">-->
-		<!--					<div class="col-12 col-md-6 col-lg-4 col-xxl-3 position-relative">-->
-		<!--						<AddEditWorkerHours-->
-		<!--							v-bind:key="edit.hours._id"-->
-		<!--							v-bind:date="moment(edit.hours.date)"-->
-		<!--							v-bind:hours="edit.hours"-->
-		<!--							v-on:done="onEditDeleteHours"-->
-		<!--							v-on:cancel="edit = null"-->
-		<!--							v-on:deleted="onEditDeleteHours"-->
-		<!--						></AddEditWorkerHours>-->
-		<!--					</div>-->
-		<!--				</div>-->
-
-		<!--				&lt;!&ndash;				<div class="hours border border-primary rounded p-2 mb-3">&ndash;&gt;-->
-		<!--				<div class="hours rounded p-2 mb-3">-->
-		<!--					<div class="hour p-1" v-for="hour of 24">-->
-		<!--						<div class="mb-1">-->
-		<!--							{{ hour - 1 }}-->
-		<!--						</div>-->
-
-		<!--						<div class="worker-hours">-->
-		<!--							<div class="worker-hour" v-for="workerHour of getDayHours(i + 1, hour - 1)"></div>-->
-		<!--						</div>-->
-		<!--					</div>-->
-		<!--				</div>-->
-
-		<!--				<table class="workers">-->
-		<!--					<tbody>-->
-		<!--						<tr class="worker" v-for="worker of getDayWorkers(i + 1)">-->
-		<!--							<td class="td-auto pe-3 align-top">-->
-		<!--								<b class="text-primary">-->
-		<!--									{{ worker.name }}-->
-		<!--								</b>-->
-		<!--							</td>-->
-
-		<!--							<td class="pb-2">-->
-		<!--								<div class="row g-2">-->
-		<!--									<div class="col-auto" v-for="workerHour of worker.hours">-->
-		<!--										<button-->
-		<!--											class="worker-hours-btn btn btn-sm"-->
-		<!--											v-on:click="add = null; edit = { index: i, hours: workerHour }"-->
-		<!--										>-->
-		<!--											{{ workerHour.start }} - {{ workerHour.end }}-->
-		<!--										</button>-->
-		<!--									</div>-->
-		<!--								</div>-->
-		<!--							</td>-->
-		<!--						</tr>-->
-		<!--					</tbody>-->
-		<!--				</table>-->
-		<!--			</div>-->
-		<!--		</div>-->
 	</div>
 </div>
