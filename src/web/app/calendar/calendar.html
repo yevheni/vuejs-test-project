@@ -48,10 +48,20 @@
 
 		<div class="week px-4">
 			<div v-for="(day, i) of weekdays" class="weekday mb-4">
-				<div class="mb-2">
-					<b>
-						{{ day.text }}
-					</b>
+				<div class="row g-2 mb-2">
+					<div class="col">
+						<b>
+							{{ day.text }}
+						</b>
+					</div>
+
+					<div class="col-auto">
+						<button type="button" class="btn btn-primary btn-sm" v-on:click="add = true">
+							<b>
+								+
+							</b>
+						</button>
+					</div>
 				</div>
 
 				<div class="hours" :style="{ gridTemplateRows: `minmax(2rem, auto) repeat(${getDayHours(day.day).length}, auto)` }">
