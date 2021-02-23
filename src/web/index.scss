@@ -31,6 +31,32 @@
 @import "~bootstrap/scss/helpers";
 @import "~bootstrap/scss/utilities/api";
 
+@import "~toastr";
+
 html {
 	font-size: 14px;
+}
+
+#toast-container {
+	top: 1rem;
+	right: 1rem;
+
+	.toast {
+		opacity: 1;
+		padding: 0.5rem 1rem;
+		border-radius: $border-radius;
+		box-shadow: $box-shadow;
+
+		.toast-message {
+			font-size: 1rem;
+		}
+
+		&.toast-error {
+			background-image: none !important;
+		}
+
+		&:hover {
+			box-shadow: $box-shadow;
+		}
+	}
 }

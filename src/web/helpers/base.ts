@@ -1,5 +1,11 @@
 import Vue from "vue";
 import axios from "axios";
+import toastr from "toastr";
+
+toastr.options.closeButton = true;
+toastr.options.extendedTimeOut = 20000;
+toastr.options.timeOut = 10000;
+toastr.options.progressBar = true;
 
 interface IError extends Error {
 	response?: {
@@ -21,7 +27,7 @@ export const Base = Vue.extend({
 
 			const message = err.response?.data?.message || err.message;
 
-			alert(message);
+			toastr.error(message);
 		}
 	},
 });
