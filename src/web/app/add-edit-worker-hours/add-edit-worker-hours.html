@@ -1,6 +1,10 @@
 <div class="add-edit-worker-hours">
 	<div class="bg-white border border-primary rounded shadow p-3">
 		<form v-on:submit.prevent="onSubmit">
+			<h5 class="mb-3">
+				{{ !!id ? "Edit worker" : "Add worker" }}
+			</h5>
+
 			<div class="mb-3">
 				<label for="worker" class="label">
 					Select worker
