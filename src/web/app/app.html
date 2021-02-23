@@ -13,17 +13,16 @@
 
 					<div class="col"></div>
 
-					<div class="col-auto" v-for="btn of nav_buttons">
-						<button
-							type="button"
+					<div class="col-auto" v-for="btn of navButtons">
+						<router-link
+							:to="btn.path"
 							class="btn"
-							v-bind:class="btn.id === view ? 'btn-primary' : 'btn-outline-primary'"
-							v-on:click="view = btn.id"
+							v-bind:class="$route.path === btn.path ? 'btn-primary' : 'btn-outline-primary'"
 						>
 							<b>
 								{{ btn.text }}
 							</b>
-						</button>
+						</router-link>
 					</div>
 				</div>
 			</div>
@@ -31,12 +30,6 @@
 	</div>
 
 	<div class="pt-4">
-		<div v-if="view === 'workers'">
-			<Workers></Workers>
-		</div>
-
-		<div v-if="view === 'calendar'">
-			<Calendar></Calendar>
-		</div>
+		<router-view></router-view>
 	</div>
 </div>

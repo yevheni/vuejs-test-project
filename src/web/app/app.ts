@@ -9,14 +9,13 @@ export const App = Base.extend({
 
 	data() {
 		return {
-			view: "calendar", // workers, calendar
-			nav_buttons: [
+			navButtons: [
 				{
-					id: "calendar",
+					path: "/",
 					text: "Calendar",
 				},
 				{
-					id: "workers",
+					path: "/workers",
 					text: "Workers",
 				},
 			]
@@ -39,9 +38,4 @@ export const App = Base.extend({
 	created() {
 		this.init().catch(this.errorHandle);
 	},
-
-	components: {
-		Workers: Workers,
-		Calendar: Calendar,
-	}
 });
