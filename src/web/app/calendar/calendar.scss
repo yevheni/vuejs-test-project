@@ -1,75 +1,49 @@
 .calendar {
-	.td-auto {
-		white-space: nowrap;
-		width: 1%;
-	}
-
-	.week-holder {
-		overflow: auto;
-		display: flex;
-	}
-
 	.week {
-		.hour, .day, .worker-hours {
-			padding: 0.3rem 0.6rem;
-			border-radius: $border-radius;
-		}
-
 		.hours {
 			display: grid;
 			overflow: auto;
 			column-gap: 3px;
 			row-gap: 3px;
 			grid-template-columns: repeat(24, minmax(2.5rem, 1fr));
-		}
 
-		.worker-holder {
-			grid-column-start: 1;
-			grid-column-end: none;
-			background-color: transparentize(white, 0.5);
-			border-radius: $border-radius-sm;
-		}
+			.hour {
+				padding: 0.3rem 0.6rem;
+				border-radius: $border-radius;
+				grid-row: 1;
+				grid-row-end: none;
+				background-color: transparentize($primary, 0.97);
+				text-align: center;
 
-		.worker-hours-grid {
-			display: grid;
-			column-gap: 3px;
-			row-gap: 3px;
-			grid-template-columns: repeat(24, minmax(2.5rem, 1fr));
-		}
-
-		.hour {
-			grid-row: 1;
-			grid-row-end: none;
-			background-color: transparentize($primary, 0.97);
-			text-align: center;
-
-			&:nth-child(odd) {
-				background-color: transparentize($primary, 0.95);
+				&:nth-child(odd) {
+					background-color: transparentize($primary, 0.95);
+				}
 			}
-		}
 
-		.worker-hours {
-			background-color: $primary;
-			color: white;
-			height: 0.6rem;
-			padding: 0;
-			box-shadow: $box-shadow-sm;
-		}
+			.worker-hours {
+				background-color: $primary;
+				color: white;
+				height: 0.6rem;
+				border-radius: $border-radius;
+				box-shadow: $box-shadow-sm;
+			}
 
-		.worker-info {
-			width: max-content;
-			position: relative;
-			background-color: white;
-			margin-bottom: 3px;
-			margin-left: 1px;
-			border-radius: $border-radius-sm;
-			box-shadow: $box-shadow-sm;
-
-			>.btn {
-				color: $primary;
-				font-size: 12px;
-				padding: 0.2rem 0.4rem;
+			.worker-info {
+				width: max-content;
+				position: relative;
+				background-color: white;
+				margin-top: 1px;
+				margin-bottom: 5px;
+				margin-left: 1px;
 				border-radius: $border-radius-sm;
+				box-shadow: $box-shadow-sm;
+
+				>.btn {
+					color: $primary;
+					font-size: 12px;
+					padding: 0.2rem 0.4rem;
+					border-radius: $border-radius-sm;
+				}
 			}
 		}
 	}
