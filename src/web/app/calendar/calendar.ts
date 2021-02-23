@@ -5,6 +5,7 @@ import moment, {unitOfTime} from "moment";
 import {IHour} from "../../interfaces/hour";
 import {AddEditWorkerHours} from "../add-edit-worker-hours/add-edit-worker-hours";
 import {Picker} from "./picker/picker";
+import {IWorker} from "../../interfaces/worker";
 
 export const Calendar = Base.extend({
 	template: template,
@@ -15,18 +16,6 @@ export const Calendar = Base.extend({
 			weekStartDate: moment().day(1).hour(0).minute(0).second(0).millisecond(0),
 			get weekEndDate() {
 				return moment(this.weekStartDate).day(7);
-			},
-			get weekdays() {
-				return Array(7).fill(null).map((el, i) => {
-					const day = i + 1;
-					const date = moment(this.weekStartDate).weekday(day);
-
-					return {
-						day: day,
-						date: date,
-						text: date.format("dddd, DD"),
-					};
-				})
 			},
 			workers: this.$store.state.workers,
 			hours: [] as IHour[],
@@ -53,6 +42,52 @@ export const Calendar = Base.extend({
 				const endWeek = this.weekEndDate.format("DD");
 
 				return `${startWeek} - ${endWeek}`;
+			},
+
+			get weekdays () {
+				return Array(7).fill(null).map((el, i) => {
+					type Hour = IHour & { style: any };
+					type WorkersObject = {
+						[key: string]: IWorker & { style?: any }
+					};
+
+					const day = i + 1;
+					const date = moment(this.weekStartDate).weekday(day);
+					const hours: Hour[] = this.hours.filter((h: IHour) => moment(h.date).weekday() === day);
+					const workers: WorkersObject = {};
+
+					hours.forEach((h) => {
+						workers[h.worker._id] = h.worker;
+					});
+
+					const workersArr = Object.values(workers).map((w, i) => {
+						w.style = {
+							gridRow: i + 2,
+						};
+						return w;
+					});
+
+					return {
+						day: day,
+						date: date,
+						text: date.format("dddd, DD"),
+						workers: workersArr,
+						hours: hours.map((hour) => {
+							const index = workersArr.findIndex(w => w._id === hour.worker._id);
+
+							hour.style = {
+								gridRow: index + 2,
+								gridColumnStart: hour.start + 1,
+								gridColumnEnd: hour.end + 1,
+							};
+
+							return hour;
+						}),
+						style: {
+							gridTemplateRows: `minmax(2rem, auto) repeat(${workersArr.length}, auto)`
+						}
+					};
+				})
 			},
 		}
 	},

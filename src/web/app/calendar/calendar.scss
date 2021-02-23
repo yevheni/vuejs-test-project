@@ -23,6 +23,20 @@
 			grid-template-columns: repeat(24, minmax(2.5rem, 1fr));
 		}
 
+		.worker-holder {
+			grid-column-start: 1;
+			grid-column-end: none;
+			background-color: transparentize(white, 0.5);
+			border-radius: $border-radius-sm;
+		}
+
+		.worker-hours-grid {
+			display: grid;
+			column-gap: 3px;
+			row-gap: 3px;
+			grid-template-columns: repeat(24, minmax(2.5rem, 1fr));
+		}
+
 		.hour {
 			grid-row: 1;
 			grid-row-end: none;

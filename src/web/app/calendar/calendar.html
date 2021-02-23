@@ -33,7 +33,13 @@
 				<div class="row g-2 mb-3">
 					<div class="col">
 						<h5 class="mb-0">
-							{{ day.text }}
+							<span class="me-2">
+								{{ day.text }}
+							</span>
+
+							<span class="badge bg-primary rounded-pill">
+								{{ day.hours.length }}
+							</span>
 						</h5>
 					</div>
 
@@ -74,10 +80,7 @@
 					</div>
 				</div>
 
-				<div
-					class="hours"
-					:style="{ gridTemplateRows: `minmax(2rem, auto) repeat(${getDayHours(day.day).length}, auto)` }"
-				>
+				<div class="hours" :style="day.style">
 					<div
 						v-for="(hour, h) of 24"
 						class="hour"
@@ -89,7 +92,7 @@
 					</div>
 
 					<div
-						v-for="workerHour of getDayHours(day.day)"
+						v-for="workerHour of day.hours"
 						class="worker-hours-holder"
 						:style="workerHour.style"
 					>
