@@ -1,8 +1,8 @@
 const path = require('path');
 const webpack = require("webpack");
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const CopyPlugin = require('copy-webpack-plugin');
 const minimist = require("minimist");
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const argv = minimist(process.argv);
 
@@ -122,7 +122,7 @@ module.exports = {
 					loader: 'html-loader',
 					options: {
 						// esModule: true,
-						minimize: false,
+						minimize: false
 					}
 				}
 			}
@@ -140,13 +140,10 @@ module.exports = {
 			filename: "css/index.css",
 		}),
 		// new OptimizeCssAssetsPlugin(),
-		new CopyPlugin({
-			patterns: [
-				{
-					from: path.join(sourceDir, `index.html`),
-					to: path.join(distDir, `index.html`)
-				},
-			]
-		}),
+		new HtmlWebpackPlugin({
+			title: "Vuejs",
+			hash: true,
+			inject: "body"
+		})
 	],
 };

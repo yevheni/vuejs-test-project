@@ -5,10 +5,12 @@ import {store} from "./store";
 import {router} from "./router";
 
 const app = new Vue({
-	el: '#root',
+	template: "<App></App>",
 	store: store,
 	router: router,
 	components: {
 		App: App,
 	}
-});
+}).$mount();
+
+document.body.appendChild(app.$el);
