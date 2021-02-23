@@ -1,6 +1,8 @@
 import express from 'express';
 import {db} from "./database";
 import {logg} from "@yevheni/logg";
+import moment from "moment";
+import {WorkerHours} from "./worker-hours";
 
 const api = express.Router();
 
@@ -91,6 +93,11 @@ api.put("/workers", (req, res, next) => {
 /** Hours */
 api.post("/hours", (req, res, next) => {
 	(async () => {
+		/** Check if hours can be added */
+		const exists = await WorkerHours.hoursExists(req.body);
+
+		if (exists) throw new Error(`This worker hours already taken`);
+
 		/** Create hours */
 		const hoursDoc = await db.models.hours.create({
 			worker: req.body.worker,
@@ -173,6 +180,15 @@ api.put("/hours", (req, res, next) => {
 		});
 
 		if (!hoursDoc) throw new Error(`Hours document not found`);
+
+		/** Check if hours can be added */
+		const exists = await WorkerHours.hoursExists({
+			...req.body,
+			worker: hoursDoc.get("worker"),
+			date: hoursDoc.get("date"),
+		});
+
+		if (exists) throw new Error(`This worker hours already taken`);
 
 		/** Update */
 		hoursDoc.set("start", req.body.start);
