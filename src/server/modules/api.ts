@@ -1,7 +1,5 @@
 import express from 'express';
 import {db} from "./database";
-import {logg} from "@yevheni/logg";
-import moment from "moment";
 import {WorkerHours} from "./worker-hours";
 
 const api = express.Router();
@@ -9,10 +7,17 @@ const api = express.Router();
 api.post("/workers", (req, res, next) => {
 	(async () => {
 		/** Get worker name */
-		const name = req.body.name;
+		const name = req.body.name.trim();
 
 		/** Check if "name" provided */
 		if (!name) throw new Error(`Worker's name can't be empty`);
+
+		/** Check if worker exists */
+		const exists = await db.models.workers.countDocuments({
+			name: name
+		});
+
+		if (exists) throw new Error(`Name already taken`);
 
 		/** Create worker */
 		const workerDoc = await db.models.workers.create({
