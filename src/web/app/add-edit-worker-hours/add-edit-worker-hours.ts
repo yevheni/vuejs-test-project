@@ -1,15 +1,15 @@
 import template from "./add-edit-worker-hours.html";
 import {Base} from "../../helpers/base";
 import {IWorker} from "../../interfaces/worker";
+import moment from "moment";
 
 export const AddEditWorkerHours = Base.extend({
 	template: template,
 
 	props: {
-		dates: {
-			type: Array,
+		date: {
 			required: true,
-			default: [],
+			default: moment(),
 		}
 	},
 
@@ -22,7 +22,7 @@ export const AddEditWorkerHours = Base.extend({
 			// end: this.hours?.end || ""
 			form: {
 				worker: "",
-				date: "",
+				// date: "",
 				start: "",
 				end: "",
 			}
@@ -37,7 +37,7 @@ export const AddEditWorkerHours = Base.extend({
 		async onSubmit(e: Event) {
 			try {
 				if (!this.form.worker) throw new Error(`Worker not selected`);
-				if (!this.form.date) throw new Error(`Day not selected`);
+				// if (!this.form.date) throw new Error(`Day not selected`);
 				if (this.form.start === "") throw new Error(`Start hours not selected`);
 				if (this.form.end === "") throw new Error(`End hours not selected`);
 				if (this.form.start >= this.form.end) throw new Error(`Start hour can't be greater or equal than end hour`);
@@ -56,7 +56,10 @@ export const AddEditWorkerHours = Base.extend({
 				// 	this.$emit("done", updatedHours);
 				// } else {
 					/** Create */
-					const hoursRes = await this.api.post("/hours", this.form);
+					const hoursRes = await this.api.post("/hours", {
+						...this.form,
+						date: this.date.valueOf(),
+					});
 					const createdHours = hoursRes.data.hours;
 
 					this.$emit("done", createdHours);

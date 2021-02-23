@@ -31,7 +31,7 @@ export const Calendar = Base.extend({
 			},
 			workers: this.$store.state.workers,
 			hours: [] as IHour[],
-			add: false,
+			add: -1,
 			edit: null as any,
 
 			get year() {

@@ -28,24 +28,6 @@
 			</div>
 		</div>
 
-		<div class="px-4">
-			<div class="mb-4">
-				<button type="button" class="btn btn-primary w-100" v-on:click="add = true">
-					<b>
-						Add hours
-					</b>
-				</button>
-			</div>
-
-			<div class="mb-4" v-if="add">
-				<AddEditWorkerHours
-					:dates="weekdays.map(w => w.date)"
-					v-on:done="onAddHours"
-					v-on:cancel="add = false"
-				></AddEditWorkerHours>
-			</div>
-		</div>
-
 		<div class="week px-4">
 			<div v-for="(day, i) of weekdays" class="weekday mb-4">
 				<div class="row g-2 mb-2">
@@ -56,12 +38,20 @@
 					</div>
 
 					<div class="col-auto">
-						<button type="button" class="btn btn-primary btn-sm" v-on:click="add = true">
+						<button type="button" class="btn btn-primary btn-sm" v-on:click="add = i">
 							<b>
 								+
 							</b>
 						</button>
 					</div>
+				</div>
+
+				<div class="mb-3" v-if="add === i">
+					<AddEditWorkerHours
+						:date="day.date"
+						v-on:done="onAddHours"
+						v-on:cancel="add = -1"
+					></AddEditWorkerHours>
 				</div>
 
 				<div class="hours" :style="{ gridTemplateRows: `minmax(2rem, auto) repeat(${getDayHours(day.day).length}, auto)` }">
