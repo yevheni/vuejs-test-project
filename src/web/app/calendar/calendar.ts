@@ -139,20 +139,6 @@ export const Calendar = Base.extend({
 			this.edit = null;
 			this.init().catch(this.errorHandle);
 		},
-
-		getDayHours(day: number) {
-			return this.hours.filter((h: IHour) => {
-				return moment(h.date).weekday() === day;
-			}).map((hour: IHour & { style: any }, i: number) => {
-				hour.style = {
-					gridRow: i + 2,
-					gridColumnStart: hour.start + 1,
-					gridColumnEnd: hour.end + 1,
-				};
-
-				return hour;
-			});
-		},
 	},
 
 	created() {
