@@ -12,6 +12,7 @@ export const Workers = Base.extend({
 			workers: this.$store.state.workers,
 			add: false,
 			edit: null,
+			deleteWorkerId: "",
 		}
 	},
 
@@ -24,9 +25,11 @@ export const Workers = Base.extend({
 			this.edit = null;
 		},
 
-		async deleteWorker(id: string) {
+		async deleteWorker() {
 			try {
 				this.edit = null;
+
+				const id = this.deleteWorkerId;
 
 				/** Delete worker */
 				const deleteRes = await this.api.delete("/workers", {
@@ -37,6 +40,8 @@ export const Workers = Base.extend({
 
 				/** Delete worker from store */
 				this.$store.commit("delete_worker", id);
+
+				this.deleteWorkerId = "";
 			} catch(err) {
 				this.errorHandle(err);
 			}

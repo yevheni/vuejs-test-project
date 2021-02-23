@@ -47,10 +47,10 @@
 
 		<div class="row g-2 g-md-3 mb-3" v-if="workers.length">
 			<div class="col-12 col-md-6 col-lg-4 col-xxl-3" v-for="worker of workers">
-				<div class="bg-primary-light border border-1 border-primary-light rounded py-2 ps-3 pe-2">
+				<div class="bg-primary-light border border-1 border-primary-light rounded p-3">
 					<div class="row gx-2 align-items-center">
 						<div class="col-auto">
-							<b>
+							<b class="">
 								{{ worker.name }}
 							</b>
 						</div>
@@ -58,7 +58,7 @@
 						<div class="col"></div>
 
 						<div class="col-auto">
-							<button type="button" class="edit-btn btn btn-sm"
+							<button type="button" class="edit-btn btn"
 							        v-on:click="add = false; edit = worker">
 								<b>
 									Edit
@@ -67,12 +67,36 @@
 						</div>
 
 						<div class="col-auto">
-							<button type="button" class="btn btn-danger btn-sm text-white"
-							        v-on:click="deleteWorker(worker._id)">
+							<button type="button" class="btn btn-danger text-white"
+							        v-on:click="deleteWorkerId = worker._id">
 								<b>
 									Delete
 								</b>
 							</button>
+						</div>
+					</div>
+
+					<div class="mt-2" v-if="deleteWorkerId === worker._id">
+						<div class="shadow-sm bg-white rounded-2 p-3 border-danger border">
+							<h6 class="mb-3">
+								Are you sure?
+							</h6>
+
+							<div class="row g-2">
+								<div class="col">
+									<button type="button" class="btn btn-secondary w-100" v-on:click="deleteWorkerId = ''">
+										Cancel
+									</button>
+								</div>
+
+								<div class="col">
+									<button type="button" class="btn btn-danger text-white w-100" v-on:click="deleteWorker">
+										<b>
+											Confirm
+										</b>
+									</button>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>

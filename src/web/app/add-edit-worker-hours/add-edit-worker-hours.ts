@@ -29,6 +29,7 @@ export const AddEditWorkerHours = Base.extend({
 	data() {
 		return {
 			workers: this.$store.state.workers,
+			showDeleteConfirm: false,
 			form: {
 				worker: this.$props.worker,
 				start: this.$props.start,
@@ -73,6 +74,8 @@ export const AddEditWorkerHours = Base.extend({
 
 		async deleteHours() {
 			try {
+				this.showDeleteConfirm = false;
+
 				await this.api.delete("/hours", {
 					params: {
 						id: this.id,
