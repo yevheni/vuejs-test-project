@@ -6,7 +6,13 @@
 					Select worker
 				</label>
 
-				<select name="worker" id="worker" class="form-select" v-model="form.worker">
+				<select
+					name="worker"
+					id="worker"
+					class="form-select"
+					v-model="form.worker"
+					:disabled="!!id"
+				>
 					<option value="">
 						Select worker
 					</option>
@@ -14,50 +20,7 @@
 						{{ worker.name }}
 					</option>
 				</select>
-
-<!--				<div class="row g-2">-->
-<!--					<div class="col-auto" v-for="worker of workers">-->
-<!--						<button-->
-<!--							type="button"-->
-<!--							class="btn btn-sm"-->
-<!--							v-on:click="workerId = worker._id"-->
-<!--							v-bind:class="workerId === worker._id ? 'btn-primary' : 'btn-outline-primary'"-->
-<!--						>-->
-<!--							{{ worker.name }}-->
-<!--						</button>-->
-<!--					</div>-->
-<!--				</div>-->
 			</div>
-
-<!--			<div class="mb-3">-->
-<!--				<label for="date" class="label">-->
-<!--					Day-->
-<!--				</label>-->
-
-<!--				<select name="date" id="date" class="form-select" v-model="form.date">-->
-<!--					<option value="">-->
-<!--						Select day-->
-<!--					</option>-->
-<!--					<option v-for="date of dates" :value="date.valueOf()">-->
-<!--						{{ date.format("dddd (DD)") }}-->
-<!--					</option>-->
-<!--				</select>-->
-<!--			</div>-->
-
-<!--			<div class="mb-3" v-if="hours">-->
-<!--				<label class="label mb-2">-->
-<!--					Worker-->
-<!--				</label>-->
-
-<!--				<div class="">-->
-<!--					<button-->
-<!--						type="button"-->
-<!--						class="btn btn-sm btn-primary"-->
-<!--					>-->
-<!--						{{ getWorker(hours.worker)?.name }}-->
-<!--					</button>-->
-<!--				</div>-->
-<!--			</div>-->
 
 			<div class="row g-2 mb-3">
 				<div class="col-6">
@@ -92,13 +55,13 @@
 			</div>
 
 			<div class="row g-2">
-<!--				<div class="col-auto" v-if="hours">-->
-<!--					<button type="button" class="btn btn-danger text-white" v-on:click="deleteHours">-->
-<!--						<b>-->
-<!--							Delete-->
-<!--						</b>-->
-<!--					</button>-->
-<!--				</div>-->
+				<div class="col-auto" v-if="!!id">
+					<button type="button" class="btn btn-danger text-white" v-on:click="deleteHours">
+						<b>
+							Delete
+						</b>
+					</button>
+				</div>
 
 				<div class="col"></div>
 
@@ -111,8 +74,7 @@
 				<div class="col-auto">
 					<button type="submit" class="btn btn-primary">
 						<b>
-<!--							{{ hours ? "Save" : "Add" }}-->
-							Add
+							{{ !!id ? "Save" : "Add" }}
 						</b>
 					</button>
 				</div>
