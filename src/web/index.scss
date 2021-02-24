@@ -37,6 +37,32 @@ html {
 	font-size: 14px;
 }
 
+.btn-primary {
+	color: white;
+
+	&:hover, &:focus {
+		color: white;
+	}
+
+	&:hover {
+		background-color: darken($primary, 5);
+	}
+}
+
+.btn-info {
+	color: white;
+
+	&:hover, &:focus {
+		color: white;
+	}
+}
+
+.btn-outline-primary {
+	&:hover, &:focus {
+		color: white;
+	}
+}
+
 #toast-container {
 	top: 1rem;
 	right: 1rem;
@@ -44,15 +70,31 @@ html {
 	.toast {
 		opacity: 1;
 		padding: 0.5rem 1rem;
-		border-radius: $border-radius;
-		box-shadow: $box-shadow;
+		border-radius: 0;
+		box-shadow: $box-shadow-sm;
+
+		.toast-close-button {
+			width: 20px;
+			height: 20px;
+			top: 0;
+			right: -0.5rem;
+			background-position: center;
+			background-repeat: no-repeat;
+			background-size: 10px;
+			background-image: url("./assets/img/close.svg");
+		}
 
 		.toast-message {
 			font-size: 1rem;
 		}
 
+		.toast-progress {
+			opacity: 0.25;
+		}
+
 		&.toast-error {
 			background-image: none !important;
+			background-color: $danger;
 		}
 
 		&:hover {

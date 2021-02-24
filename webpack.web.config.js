@@ -132,7 +132,7 @@ module.exports = {
 		}),
 		// new OptimizeCssAssetsPlugin(),
 		new HtmlWebpackPlugin({
-			title: "Vuejs",
+			title: "Stava",
 			hash: true,
 			inject: "body"
 		})

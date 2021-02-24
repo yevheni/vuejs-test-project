@@ -1,16 +1,12 @@
 <div class="picker">
-	<div class="border bg-primary-light border-primary-light rounded p-2 p-md-3">
+	<div class="p-2 p-md-3">
 		<div class="row gx-3 align-items-center">
 			<div class="col-auto">
 				<button
 					type="button"
-					class="btn btn-secondary btn-sm"
+					class="btn btn-info arrow-btn prev"
 					v-on:click="$emit('prev')"
-				>
-					<h6 class="mb-0">
-						{{ "<" }}
-					</h6>
-				</button>
+				></button>
 			</div>
 
 			<div class="col">
@@ -22,13 +18,9 @@
 			<div class="col-auto">
 				<button
 					type="button"
-					class="btn btn-secondary btn-sm"
+					class="btn btn-info arrow-btn next"
 					v-on:click="$emit('next')"
-				>
-					<h6 class="mb-0">
-						{{ ">" }}
-					</h6>
-				</button>
+				></button>
 			</div>
 		</div>
 	</div>

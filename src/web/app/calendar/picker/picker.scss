@@ -1,3 +1,18 @@
 .picker {
+	background-color: transparentize($dark, 0.95);
 
+	.arrow-btn {
+		width: 30px;
+		height: 30px;
+		background-size: 14px;
+		background-repeat: no-repeat;
+		background-position: center;
+
+		&.prev {
+			background-image: url("../../../assets/img/arrow-left.svg");
+		}
+		&.next {
+			background-image: url("../../../assets/img/arrow-right.svg");
+		}
+	}
 }

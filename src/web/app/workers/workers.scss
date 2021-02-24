@@ -4,6 +4,10 @@
 		color: transparentize($primary, 0.15);
 	}
 
+	.worker {
+		background-color: transparentize($dark, 0.95);
+	}
+
 	@media (min-width: 768px) {
 		.add-edit-worker {
 			position: absolute;

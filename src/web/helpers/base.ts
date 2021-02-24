@@ -6,6 +6,7 @@ toastr.options.closeButton = true;
 toastr.options.extendedTimeOut = 20000;
 toastr.options.timeOut = 10000;
 toastr.options.progressBar = true;
+toastr.options.closeHtml = '<button type="button" class="toast-close-button"></button>';
 
 interface IError extends Error {
 	response?: {

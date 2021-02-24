@@ -1,8 +1,8 @@
 /** Bootstrap colors overrides */
-$primary: #1576cd;
-$dark: #212424;
-$secondary: #e6ecf1;
-$danger: #d04c4c;
+$primary: #ff6803;
+$dark: #293339;
+$secondary: lighten($dark, 75);
+$info: lighten($dark, 45);
 $success: #1ecd88;
 
 /** Colors */
@@ -14,23 +14,28 @@ $custom-colors: (
 	"primary": $primary,
 	"dark": $dark,
 	"secondary": $secondary,
-	"danger": $danger,
 	"success": $success,
-
 	// Custom
 	"black": $black,
 	"primary-light": $primary-light,
 );
 
-$border-radius: 0.4rem;
-$border-radius-sm: 0.2rem;
-$border-radius-lg: 0.6rem;
-$border-radius-pill: 40rem;
+$body-color: $dark;
+
+$border-radius: 3px;
+$border-radius-sm: 2px;
+$border-radius-lg: 4px;
+$border-radius-pill: 100vw;
 
 $enable-negative-margins: true;
 $enable-shadows: true;
 
 $link-decoration: none;
+
+$box-shadow: 0 .5rem 1rem rgba($dark, .15) !default;
+$box-shadow-sm: 0 .125rem .25rem rgba($dark, .075) !default;
+$box-shadow-lg: 0 1rem 3rem rgba($dark, .175) !default;
+$box-shadow-inset: inset 0 1px 2px rgba($dark, .075) !default;
 
 @import "~bootstrap/scss/functions";
 @import "~bootstrap/scss/variables";

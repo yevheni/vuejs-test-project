@@ -1,6 +1,6 @@
 <div class="workers container">
-	<div class="bg-white rounded shadow p-4">
-		<div class="row gx-2 mb-3">
+	<div class="bg-white p-3 p-sm-4 shadow mb-5">
+		<div class="row gx-2 mb-3 align-items-center">
 			<div class="col-auto">
 				<h5 class="mb-0">
 					<span>
@@ -47,7 +47,7 @@
 
 		<div class="row g-2 g-md-3 mb-3" v-if="workers.length">
 			<div class="col-12 col-md-6 col-lg-4 col-xxl-3" v-for="worker of workers">
-				<div class="bg-primary-light border border-1 border-primary-light rounded p-3">
+				<div class="worker p-3">
 					<div class="row gx-2 align-items-center">
 						<div class="col-auto">
 							<b class="">
@@ -58,7 +58,7 @@
 						<div class="col"></div>
 
 						<div class="col-auto">
-							<button type="button" class="edit-btn btn"
+							<button type="button" class="btn-sm btn-info btn"
 							        v-on:click="add = false; edit = worker">
 								<b>
 									Edit
@@ -67,7 +67,7 @@
 						</div>
 
 						<div class="col-auto">
-							<button type="button" class="btn btn-danger text-white"
+							<button type="button" class="btn btn-danger btn-sm"
 							        v-on:click="deleteWorkerId = worker._id">
 								<b>
 									Delete
@@ -77,7 +77,7 @@
 					</div>
 
 					<div class="mt-2" v-if="deleteWorkerId === worker._id">
-						<div class="shadow-sm bg-white rounded-2 p-3 border-danger border">
+						<div class="shadow-sm bg-white p-3 border-danger border">
 							<h6 class="mb-3">
 								Are you sure?
 							</h6>
