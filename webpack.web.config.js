@@ -48,7 +48,7 @@ module.exports = {
 	resolve: {
 		extensions: ['.ts', '.tsx', '.js', '.jsx', '.json'],
 		alias: {
-			vue: 'vue/dist/vue.js'
+			vue: `vue/dist/${mode === "production" ? "vue.min.js" : "vue.js"}`
 		},
 	},
 	module: {

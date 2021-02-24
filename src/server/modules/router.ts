@@ -29,6 +29,11 @@ router.use("/api", api);
 /** Static */
 router.use(["/", "/*"], express.static(path.join(process.cwd(), "dist/web")))
 
+/** Routes */
+router.get(["/", "/workers",], (req, res) => {
+	res.sendFile(path.join(process.cwd(), "dist/web/index.html"));
+});
+
 /** Error handle */
 router.use((err: Error, req: express.Request, res: express.Response, next: express.NextFunction) => {
 	console.error(err);
