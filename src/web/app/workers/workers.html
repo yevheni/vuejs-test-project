@@ -24,13 +24,6 @@
 			</div>
 		</div>
 
-		<div class="add-worker-holder mb-3" v-if="add">
-			<AddEditWorker
-				v-on:done="onAdd"
-				v-on:cancel="add = false"
-			></AddEditWorker>
-		</div>
-
 		<div class="row g-2 g-md-3 mb-3" v-if="workers.length">
 			<div class="col-12 col-md-6 col-lg-4 col-xxl-3" v-for="worker of workers">
 				<div class="worker p-3">
@@ -61,43 +54,50 @@
 							</button>
 						</div>
 					</div>
-
-					<div class="edit-worker-holder" v-if="edit?._id === worker._id">
-						<AddEditWorker
-							class="mt-2"
-							v-bind:key="edit._id"
-							v-bind:id="edit._id"
-							v-bind:name="edit.name"
-							v-on:done="onEdit"
-							v-on:cancel="edit = null"
-						></AddEditWorker>
-					</div>
-
-					<div class="mt-2" v-if="deleteWorkerId === worker._id">
-						<div class="shadow-sm bg-white p-3 border-danger border">
-							<h6 class="mb-3">
-								Are you sure?
-							</h6>
-
-							<div class="row g-2">
-								<div class="col">
-									<button type="button" class="btn btn-secondary w-100" v-on:click="deleteWorkerId = ''">
-										Cancel
-									</button>
-								</div>
-
-								<div class="col">
-									<button type="button" class="btn btn-danger text-white w-100" v-on:click="deleteWorker">
-										<b>
-											Confirm
-										</b>
-									</button>
-								</div>
-							</div>
-						</div>
-					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+
+	<Modal v-if="add" v-on:close="add = false">
+		<AddEditWorker
+			v-on:done="onAdd"
+			v-on:cancel="add = false"
+		></AddEditWorker>
+	</Modal>
+
+	<Modal v-if="edit" v-on:close="edit = null">
+		<AddEditWorker
+			class="mt-2"
+			v-bind:key="edit._id"
+			v-bind:id="edit._id"
+			v-bind:name="edit.name"
+			v-on:done="onEdit"
+			v-on:cancel="edit = null"
+		></AddEditWorker>
+	</Modal>
+
+	<Modal v-if="deleteWorkerId" v-on:close="deleteWorkerId = ''">
+		<div class="shadow-sm bg-white p-3 border-danger border">
+			<h6 class="mb-3">
+				Are you sure?
+			</h6>
+
+			<div class="row g-2">
+				<div class="col">
+					<button type="button" class="btn btn-secondary w-100" v-on:click="deleteWorkerId = ''">
+						Cancel
+					</button>
+				</div>
+
+				<div class="col">
+					<button type="button" class="btn btn-danger text-white w-100" v-on:click="deleteWorker">
+						<b>
+							Confirm
+						</b>
+					</button>
+				</div>
+			</div>
+		</div>
+	</Modal>
 </div>

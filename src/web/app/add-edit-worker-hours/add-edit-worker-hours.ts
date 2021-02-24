@@ -1,6 +1,8 @@
+import "./add-edit-worker-hours.scss";
 import template from "./add-edit-worker-hours.html";
 import {Base} from "../../helpers/base";
 import moment from "moment";
+import {Modal} from "../modal/modal";
 
 export const AddEditWorkerHours = Base.extend({
 	template: template,
@@ -88,4 +90,8 @@ export const AddEditWorkerHours = Base.extend({
 			}
 		}
 	},
+
+	components: {
+		Modal: Modal,
+	}
 });

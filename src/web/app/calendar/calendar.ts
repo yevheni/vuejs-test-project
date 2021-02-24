@@ -6,6 +6,7 @@ import {IHour} from "../../interfaces/hour";
 import {AddEditWorkerHours} from "../add-edit-worker-hours/add-edit-worker-hours";
 import {Picker} from "./picker/picker";
 import {IWorker} from "../../interfaces/worker";
+import {Modal} from "../modal/modal";
 
 export const Calendar = Base.extend({
 	template: template,
@@ -19,7 +20,7 @@ export const Calendar = Base.extend({
 			},
 			workers: this.$store.state.workers,
 			hours: [] as IHour[],
-			add: -1,
+			add: null,
 			edit: null as {
 				day: number,
 				hour: IHour,
@@ -123,7 +124,7 @@ export const Calendar = Base.extend({
 			return `(${start}:00-${end}:00)`;
 		},
 
-		setEdit(day: number, hour: IHour) {
+		setEdit(day: any, hour: IHour) {
 			this.edit = {
 				day: day,
 				hour: hour,
@@ -148,5 +149,6 @@ export const Calendar = Base.extend({
 	components: {
 		AddEditWorkerHours: AddEditWorkerHours,
 		Picker: Picker,
+		Modal: Modal,
 	}
 });

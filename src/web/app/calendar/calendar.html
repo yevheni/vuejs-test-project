@@ -44,35 +44,7 @@
 					</div>
 
 					<div class="col-auto">
-						<button type="button" class="btn btn-primary plus-btn btn-sm" v-on:click="add = i"></button>
-					</div>
-				</div>
-
-				<div class="position-relative mb-3 mb-md-0" v-if="add === i || edit?.day === day.day">
-					<div class="add-edit-worker-hours-holder">
-						<div class="row g-2">
-							<div class="col-12 col-md-auto order-md-1" v-if="add === i">
-								<AddEditWorkerHours
-									:date="day.date"
-									v-on:done="onAddHours"
-									v-on:cancel="add = -1"
-								></AddEditWorkerHours>
-							</div>
-
-							<div class="col-12 col-md-auto" v-if="edit?.day === day.day">
-								<AddEditWorkerHours
-									:date="day.date"
-									:key="edit.hour._id"
-									:id="edit.hour._id"
-									:worker="edit.hour.worker._id"
-									:start="edit.hour.start"
-									:end="edit.hour.end"
-									v-on:done="onEditDeleteHours"
-									v-on:deleted="onEditDeleteHours"
-									v-on:cancel="edit = null"
-								></AddEditWorkerHours>
-							</div>
-						</div>
+						<button type="button" class="btn btn-primary plus-btn btn-sm" v-on:click="add = day"></button>
 					</div>
 				</div>
 
@@ -95,7 +67,7 @@
 						<div class="worker-hours"></div>
 
 						<div class="worker-info">
-							<button type="button" class="btn" v-on:click="setEdit(day.day, workerHour)">
+							<button type="button" class="btn" v-on:click="setEdit(day, workerHour)">
 								<b class="worker me-1">
 									{{ workerHour.worker.name }}
 								</b>
@@ -109,5 +81,27 @@
 				</div>
 			</div>
 		</div>
+
+		<Modal v-if="add" v-on:close="add = null">
+			<AddEditWorkerHours
+				:date="add.date"
+				v-on:done="onAddHours"
+				v-on:cancel="add = null"
+			></AddEditWorkerHours>
+		</Modal>
+
+		<Modal v-if="edit" v-on:close="edit = null">
+			<AddEditWorkerHours
+				:date="edit.day.date"
+				:key="edit.hour._id"
+				:id="edit.hour._id"
+				:worker="edit.hour.worker._id"
+				:start="edit.hour.start"
+				:end="edit.hour.end"
+				v-on:done="onEditDeleteHours"
+				v-on:deleted="onEditDeleteHours"
+				v-on:cancel="edit = null"
+			></AddEditWorkerHours>
+		</Modal>
 	</div>
 </div>

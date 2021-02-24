@@ -5,6 +5,12 @@
 				{{ !!id ? "Edit worker" : "Add worker" }}
 			</h5>
 
+			<div class="text-muted mb-3">
+				<b>
+					{{ date.format("dddd, DD") }}
+				</b>
+			</div>
+
 			<div class="mb-3">
 				<label for="worker" class="label">
 					Select worker
@@ -83,30 +89,30 @@
 					</button>
 				</div>
 			</div>
-
-			<div class="mt-3" v-if="showDeleteConfirm">
-				<div class="shadow-sm bg-white p-3 border-danger border">
-					<h6 class="mb-3">
-						Are you sure?
-					</h6>
-
-					<div class="row g-2">
-						<div class="col">
-							<button type="button" class="btn btn-secondary w-100" v-on:click="showDeleteConfirm = false">
-								Cancel
-							</button>
-						</div>
-
-						<div class="col">
-							<button type="button" class="btn btn-danger text-white w-100" v-on:click="deleteHours">
-								<b>
-									Confirm
-								</b>
-							</button>
-						</div>
-					</div>
-				</div>
-			</div>
 		</form>
 	</div>
+
+	<Modal v-if="showDeleteConfirm" v-on:close="showDeleteConfirm = false">
+		<div class="shadow-sm bg-white p-3 border-danger border">
+			<h6 class="mb-3">
+				Are you sure?
+			</h6>
+
+			<div class="row g-2">
+				<div class="col">
+					<button type="button" class="btn btn-secondary w-100" v-on:click="showDeleteConfirm = false">
+						Cancel
+					</button>
+				</div>
+
+				<div class="col">
+					<button type="button" class="btn btn-danger text-white w-100" v-on:click="deleteHours">
+						<b>
+							Confirm
+						</b>
+					</button>
+				</div>
+			</div>
+		</div>
+	</Modal>
 </div>

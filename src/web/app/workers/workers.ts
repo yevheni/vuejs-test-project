@@ -3,6 +3,7 @@ import template from "./workers.html";
 import {Base} from "../../helpers/base";
 import {AddEditWorker} from "../add-edit-worker/add-edit-worker";
 import {IWorker} from "../../interfaces/worker";
+import {Modal} from "../modal/modal";
 
 export const Workers = Base.extend({
 	template: template,
@@ -42,13 +43,14 @@ export const Workers = Base.extend({
 				this.$store.commit("delete_worker", id);
 
 				this.deleteWorkerId = "";
-			} catch(err) {
+			} catch (err) {
 				this.errorHandle(err);
 			}
 		},
 	},
 
 	components: {
-		AddEditWorker: AddEditWorker
+		AddEditWorker: AddEditWorker,
+		Modal: Modal
 	}
 });
