@@ -30,16 +30,7 @@ module.exports = {
 		contentBase: sourceDir,
 		compress: true,
 		port: port,
-		historyApiFallback: {
-			rewrites: [
-				{
-					from: /^.*$/,
-					to: () => {
-						return "index.html";
-					}
-				}
-			]
-		},
+		historyApiFallback: true,
 		stats: {
 			preset: "errors-warnings",
 			colors: true,
