@@ -16,7 +16,7 @@
 			<div class="col"></div>
 
 			<div class="col-auto">
-				<button type="button" class="btn btn-sm btn-primary" v-on:click="edit = null; add = !add">
+				<button type="button" class="btn btn-sm btn-primary" v-on:click="add = true">
 					<b>
 						Add
 					</b>
@@ -24,25 +24,11 @@
 			</div>
 		</div>
 
-		<div class="row g-0 justify-content-end mb-3 mb-md-0" v-if="add">
-			<div class="col-12 col-md-6 col-lg-4 col-xxl-3 position-relative">
-				<AddEditWorker
-					v-on:done="onAdd"
-					v-on:cancel="add = false"
-				></AddEditWorker>
-			</div>
-		</div>
-
-		<div class="row g-0 justify-content-end mb-3 mb-md-0" v-if="edit">
-			<div class="col-12 col-md-6 col-lg-4 col-xxl-3 position-relative">
-				<AddEditWorker
-					v-bind:key="edit._id"
-					v-bind:id="edit._id"
-					v-bind:name="edit.name"
-					v-on:done="onEdit"
-					v-on:cancel="edit = null"
-				></AddEditWorker>
-			</div>
+		<div class="add-worker-holder mb-3" v-if="add">
+			<AddEditWorker
+				v-on:done="onAdd"
+				v-on:cancel="add = false"
+			></AddEditWorker>
 		</div>
 
 		<div class="row g-2 g-md-3 mb-3" v-if="workers.length">
@@ -59,7 +45,7 @@
 
 						<div class="col-auto">
 							<button type="button" class="btn-sm btn-info btn"
-							        v-on:click="add = false; edit = worker">
+							        v-on:click="edit = worker">
 								<b>
 									Edit
 								</b>
@@ -74,6 +60,17 @@
 								</b>
 							</button>
 						</div>
+					</div>
+
+					<div class="edit-worker-holder" v-if="edit?._id === worker._id">
+						<AddEditWorker
+							class="mt-2"
+							v-bind:key="edit._id"
+							v-bind:id="edit._id"
+							v-bind:name="edit.name"
+							v-on:done="onEdit"
+							v-on:cancel="edit = null"
+						></AddEditWorker>
 					</div>
 
 					<div class="mt-2" v-if="deleteWorkerId === worker._id">

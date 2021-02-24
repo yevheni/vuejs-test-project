@@ -9,10 +9,20 @@
 	}
 
 	@media (min-width: 768px) {
-		.add-edit-worker {
-			position: absolute;
-			z-index: 1;
-			width: 100%;
+		.add-worker-holder, .edit-worker-holder {
+			position: relative;
+
+			.add-edit-worker {
+				position: absolute;
+				z-index: 1;
+				right: 0;
+			}
+		}
+
+		.add-worker-holder {
+			.add-edit-worker {
+				z-index: 2;
+			}
 		}
 	}
 }
